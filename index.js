@@ -3,16 +3,21 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const multer = require('multer');
+const fs = require('fs');
 require('dotenv').config();
+
+app.set('view engine', 'ejs');
+
+app.use(express.static(path.join(__dirname, '/views/static')));
 
 const pool = new pg.Pool({
     connectionString : process.env.DB_URL,
     ssl : { rejectUnauthorized: false }
-})
+});
 
 const storage = multer.diskStorage({
     destination : function(req, file, cb){
-        cb(null, 'views/static/uploads/')
+        cb(null, 'views/static/uploads/');
     },
     filename: function(req, file, cb){
         const nomeProduto = req.body.produto;
@@ -22,29 +27,8 @@ const storage = multer.diskStorage({
         criarProduto(nomeProduto, caminhoProduto, descricaoProduto);
     }
 });
+
 const upload = multer({storage})
-
-app.set('view engine', 'ejs');
-
-app.use(express.static(path.join(__dirname, '/views/static')));
-
-app.get('/', (req, res) => {
-    res.render('../views/index', {env : process.env.DIRETORIO});
-});
-
-app.post('/upload_files', upload.single('file'), (req, res) => {
-    res.render('../views/upload_img', {env : process.env.DIRETORIO});
-});
-
-app.get('/upload', (req, res) => {
-    res.render('../views/upload_img', {env : process.env.DIRETORIO});
-});
-
-app.get('/itens', async (req, res) => {
-    const result = await pool.query(
-        `SELECT * FROM "Item";`);
-    return res.json(result.rows);
-})
 
 async function criarProduto(nome, caminho, descricao){
     const ultimo = await pool.query(
@@ -58,8 +42,36 @@ async function criarProduto(nome, caminho, descricao){
         [ultimoIndice + 1, caminho, nome, descricao]);
 };
 
-app.get('/a', (req, res) => {
-    return res.json({a : 'a'});
+app.get('/', (req, res) => {
+    res.render('../views/index', {env : process.env.DIRETORIO});
+});
+
+app.get('/itens', async (req, res) => {
+    const result = await pool.query(
+        `SELECT * FROM "Item";`);
+    return res.json(result.rows);
+});
+
+app.get('/upload', (req, res) => {
+    res.render('../views/upload_img', {env : process.env.DIRETORIO});
+});
+
+app.post('/upload_files', upload.single('file'), (req, res) => {
+    res.render('../views/upload_img', {env : process.env.DIRETORIO});
+});
+
+app.get('/delete_files/:id', async (req, res) => {
+    const id = req.params.id;
+    const item = await pool.query(
+        `SELECT * FROM "Item" WHERE id = $1 LIMIT 1;`, [id]);
+    const caminho = item.rows[0];
+    if(caminho == undefined) return res.json({status : 'Erro'})
+    fs.unlink(`views/static/uploads/${caminho.caminho}`, function(err){
+        if (err) console.log(err);
+    });
+    await pool.query(
+        `DELETE FROM "Item" WHERE id = $1;`, [id]);
+    return res.json({status : 'Success'})
 });
 
 app.listen(3000);
