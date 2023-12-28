@@ -59,9 +59,8 @@ app.get('/upload', (req, res) => {
           return;
         }
         res.render('../views/upload_img', {env : process.env.DIRETORIO});
-        return res.json({arquivos : files});
+        return console.log({arquivos : files});
       });
-    res.render('../views/upload_img', {env : process.env.DIRETORIO});
 });
 
 app.post('/upload_files', upload.single('file'), (req, res) => {
