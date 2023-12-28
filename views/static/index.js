@@ -16,7 +16,7 @@ $('#contatoNavSelect, #contatoNav').on('click', () => {
 
 $('#produtosNavSelect, #produtosNav').on('click', async () => {
     const resposta = await $.ajax({
-        url: 'https://rla-site.onrender.com' + '/itens',
+        url: 'https://rla-site.onrender.com/itens',
         dataType: 'json',
         method: 'GET'
     });

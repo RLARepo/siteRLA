@@ -37,7 +37,7 @@ const ITEM = `
 `;
 $( document ).ready( async() => {
     const resposta = await $.ajax({
-        url: 'https://rla-site.onrender.com' + '/itens',
+        url: 'https://rla-site.onrender.com/itens',
         dataType: 'json',
         method: 'GET'
     });
