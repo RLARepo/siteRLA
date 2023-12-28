@@ -1,0 +1,17 @@
+body{
+    margin: 0;
+}
+
+.listagem{
+    grid-template-columns: repeat( auto-fit, minmax(230px, 0.5fr) );
+}
+
+.card-fones, .card-adress, .card-work{
+    background-color: #895831;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dark\:bg-slate-950 {
+        background-color: rgb(2 6 23 / var(--tw-bg-opacity));
+    }
+}
