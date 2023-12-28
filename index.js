@@ -41,15 +41,6 @@ app.get('/upload', (req, res) => {
 });
 
 app.get('/itens', async (req, res) => {
-    const create = await pool.query(
-        `CREATE TABLE public."Item"
-        (
-            id integer,
-            descricao name NOT NULL,
-            caminho name NOT NULL,
-            nome name NOT NULL,
-            PRIMARY KEY (id)
-        );`);
     const result = await pool.query(
         `SELECT * FROM "Item";`);
     return res.json(result.rows);
