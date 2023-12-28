@@ -17,8 +17,8 @@ const storage = multer.diskStorage({
     filename: function(req, file, cb){
         const nomeProduto = req.body.produto;
         const descricaoProduto = req.body.descricao;
-        const caminhoProduto = `${file.originalname + Date.now() + path.extname(file.originalname)}`;
-        cb(null, file.originalname + Date.now() + path.extname(file.originalname));
+        const caminhoProduto = `${nomeProduto + Date.now() + path.extname(file.originalname)}`;
+        cb(null, nomeProduto + Date.now() + path.extname(file.originalname));
         criarProduto(nomeProduto, caminhoProduto, descricaoProduto);
     }
 });
@@ -42,7 +42,7 @@ app.get('/upload', (req, res) => {
 
 app.get('/itens', async (req, res) => {
     const result = await pool.query(
-        `SELECT * FROM "Item";`);
+        `DELETE FROM "Item";`);
     return res.json(result.rows);
 })
 
