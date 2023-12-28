@@ -15,7 +15,6 @@ $('#contatoNavSelect, #contatoNav').on('click', () => {
 });
 
 $('#produtosNavSelect, #produtosNav').on('click', async () => {
-    console.log(DIRETORIO)
     const resposta = await $.ajax({
         url: DIRETORIO + '/itens',
         dataType: 'json',
