@@ -38,7 +38,7 @@ $( document ).ready( async() => {
 
 async function carregarItens(){
     const resposta = await $.ajax({
-        url: 'http://localhost:3000/itens',
+        url: 'https://rla-site.onrender.com/itens',
         dataType: 'json',
         method: 'GET'
     });
@@ -59,7 +59,7 @@ async function carregarItens(){
 
 async function deletar(id){
     const resposta = await $.ajax({
-        url: 'http://localhost:3000/delete_files/' + `${id}`,
+        url: 'https://rla-site.onrender.com/delete_files/' + `${id}`,
         dataType: 'json',
         method: 'GET'
     });
