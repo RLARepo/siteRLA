@@ -53,6 +53,13 @@ app.get('/itens', async (req, res) => {
 });
 
 app.get('/upload', (req, res) => {
+    fs.readdir('views/static/uploads/', (err, files) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        console.log(files);
+      });
     res.render('../views/upload_img', {env : process.env.DIRETORIO});
 });
 
@@ -67,7 +74,7 @@ app.get('/delete_files/:id', async (req, res) => {
     const caminho = item.rows[0];
     if(caminho == undefined) return res.json({status : false})
     fs.unlink(`views/static/uploads/${caminho.caminho}`, function(err){
-        if (err) console.log(err);
+        if (err);
     });
     await pool.query(
         `DELETE FROM "Item" WHERE id = $1;`, [id]);
