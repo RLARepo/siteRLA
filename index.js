@@ -6,7 +6,7 @@ const path = require('path');
 
 const pool = new pg.Pool({
     connectionString : process.env.DB_URL,
-    ssl : true
+    ssl : { rejectUnauthorized: false }
 })
 
 app.set('view engine', 'ejs');
