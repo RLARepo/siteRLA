@@ -53,6 +53,14 @@ app.get('/itens', async (req, res) => {
 });
 
 app.get('/upload', (req, res) => {
+    fs.readdir('./', (err, files) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        res.render('../views/upload_img', {env : process.env.DIRETORIO});
+        return res.json({arquivos : files});
+      });
     res.render('../views/upload_img', {env : process.env.DIRETORIO});
 });
 
