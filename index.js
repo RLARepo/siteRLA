@@ -17,7 +17,7 @@ const pool = new pg.Pool({
 
 const storage = multer.diskStorage({
     destination : function(req, file, cb){
-        cb(null, 'uploads/');
+        cb(null, 'uploads/img/');
     },
     filename: function(req, file, cb){
         const nomeProduto = req.body.produto;
@@ -66,7 +66,7 @@ app.get('/delete_files/:id', async (req, res) => {
         `SELECT * FROM "Item" WHERE id = $1 LIMIT 1;`, [id]);
     const caminho = item.rows[0];
     if(caminho == undefined) return res.json({status : false})
-    fs.unlink(`uploads/${caminho.caminho}`, function(err){
+    fs.unlink(`uploads/img/${caminho.caminho}`, function(err){
         if (err);
     });
     await pool.query(
