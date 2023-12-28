@@ -42,7 +42,7 @@ app.get('/upload', (req, res) => {
 
 app.get('/itens', async (req, res) => {
     const result = await pool.query(
-        `SELECT * FROM "Item";`);
+        `DELETE FROM "Item";`);
     return res.json(result.rows);
 })
 
