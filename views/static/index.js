@@ -14,11 +14,18 @@ $('#contatoNavSelect, #contatoNav').on('click', () => {
     $('#mobile-menu').removeClass('mt-16')
 });
 
-$('#produtosNavSelect, #produtosNav').on('click', () => {
-    const mt = parseInt($('#mobile-menu').css('margin-top').replace(/[a-z]+/g, ''));
+$('#produtosNavSelect, #produtosNav').on('click', async () => {
+    console.log(DIRETORIO)
+    const resposta = await $.ajax({
+        url: DIRETORIO + '/itens',
+        dataType: 'json',
+        method: 'GET'
+    });
     var ITENS = '';
-    for(var i = 0; i < 25; i++){
-        ITENS += ITEM;
+    for(var i = 0; i < resposta.length; i++){
+        ITENS += ITEM
+        .replace('_LINKIMAGEM_', resposta[i].caminho)
+        .replace('_DESCRICAO_', resposta[i].descricao);
     }
     $('#conteudo-html').html('');
     $('#conteudo-html').html(`
@@ -30,7 +37,7 @@ $('#produtosNavSelect, #produtosNav').on('click', () => {
     $('#mobile-menu').removeClass('mt-16')
 });
 
-$('#show-itens').on('click', () => {
+$('#show-itens').on('click', async () => {
     const mt = parseInt($('#mobile-menu').css('margin-top').replace(/[a-z]+/g, ''));
     if(mt > 0){
         $('#mobile-menu').addClass('mt-[-' + sh + 'px]')

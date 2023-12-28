@@ -64,23 +64,12 @@ const INFO = `
 ITEM = `
         <div class="border rounded-lg shadow bg-gray-800 border-gray-700">
             <a href="#" class="flex justify-center">
-                <img class="p-8 rounded-t-lg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIh3O-tQ1lAxJLp3uaq8HqQpDmR7yTjezNw5p5wmZCPQ&s" alt="product image" />
+                <img class="p-8 rounded-t-lg" src="uploads/_LINKIMAGEM_" alt="product image" />
             </a>
             <div class="px-5 pb-5">
                 <a href="#" class="break-all">
-                    <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">DESCRIÇÃO</h5>
+                    <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">_DESCRICAO_</h5>
                 </a>
             </div>
         </div>
     `;
-
-    jQuery.event.special.touchstart = {
-        setup: function( _, ns, handle ) {
-            this.addEventListener("touchstart", handle, { passive: !ns.includes("noPreventDefault") });
-        }
-    };
-    jQuery.event.special.touchmove = {
-        setup: function( _, ns, handle ) {
-            this.addEventListener("touchmove", handle, { passive: !ns.includes("noPreventDefault") });
-        }
-    };
