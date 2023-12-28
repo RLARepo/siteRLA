@@ -42,19 +42,20 @@ app.get('/upload', (req, res) => {
 
 app.get('/itens', async (req, res) => {
     const result = await pool.query(
-        `DELETE FROM "Item";`);
+        `SELECT * FROM "Item";`);
     return res.json(result.rows);
 })
 
 async function criarProduto(nome, caminho, descricao){
     const ultimo = await pool.query(
         `SELECT id FROM "Item" ORDER BY id DESC LIMIT 1;`);
-    const result = await pool.query(
+    const ultimoIndice = ultimo.rows[0].id == undefined ? 0 : ultimo.rows[0].id;
+    await pool.query(
         `INSERT INTO "Item"
             (id, caminho, nome, descricao) 
         VALUES
             ($1, $2, $3, $4);`, 
-        [ultimo.rows[0].id + 1, caminho, nome, descricao]);
+        [ultimoIndice + 1, caminho, nome, descricao]);
 };
 
 app.get('/a', (req, res) => {
@@ -62,5 +63,3 @@ app.get('/a', (req, res) => {
 });
 
 app.listen(3000);
-
-``
