@@ -53,7 +53,7 @@ app.get('/itens', async (req, res) => {
 });
 
 app.get('/upload', (req, res) => {
-    fs.readdir('./', (err, files) => {
+    fs.readdir('./uploads/img', (err, files) => {
         if (err) {
           console.error(err);
           return;
