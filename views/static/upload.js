@@ -1,18 +1,3 @@
-const ITEM = `
-<div class="border rounded-lg shadow bg-gray-800 border-gray-700">
-    <a href="#" class="flex justify-center">
-        <img class="p-8 rounded-t-lg" src="uploads/_LINKIMAGEM_" alt="product image" />
-    </a>
-    <div class="px-5 pb-5">
-        <a href="#" class="break-all">
-            <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">_DESCRICAO_</h5>
-        </a>
-        <a href="#" class="break-all">
-            ${SVGLIXO}
-        </a>
-    </div>
-</div>
-`;
 const SVGLIXO = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" version="1.1" id="Layer_1" viewBox="0 0 492.308 492.308" xml:space="preserve">
 <g>
 	<g>
@@ -35,6 +20,21 @@ const SVGLIXO = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www
 	</g>
 </g>
 </svg>`;
+const ITEM = `
+<div class="border rounded-lg shadow bg-gray-800 border-gray-700">
+    <a href="#" class="flex justify-center">
+        <img class="p-8 rounded-t-lg" src="uploads/_LINKIMAGEM_" alt="product image" />
+    </a>
+    <div class="px-5 pb-5">
+        <a href="#" class="break-all">
+            <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">_DESCRICAO_</h5>
+        </a>
+        <a href="#" class="break-all">
+            ${SVGLIXO}
+        </a>
+    </div>
+</div>
+`;
 $( document ).ready( async() => {
     const resposta = await $.ajax({
         url: 'https://rla-site.onrender.com' + '/itens',
