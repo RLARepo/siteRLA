@@ -49,7 +49,7 @@ app.get('/itens', async (req, res) => {
 async function criarProduto(nome, caminho, descricao){
     const ultimo = await pool.query(
         `SELECT id FROM "Item" ORDER BY id DESC LIMIT 1;`);
-    const ultimoIndice = ultimo.rows[0].id == undefined ? 0 : ultimo.rows[0].id;
+    const ultimoIndice = ultimo.rows[0] == undefined ? 0 : ultimo.rows[0].id;
     await pool.query(
         `INSERT INTO "Item"
             (id, caminho, nome, descricao) 
