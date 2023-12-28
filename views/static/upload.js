@@ -1,4 +1,4 @@
-const SVGLIXO = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" version="1.1" id="Layer_1" viewBox="0 0 492.308 492.308" xml:space="preserve">
+const SVGLIXO = `<svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#f3000f" version="1.1" id="Layer_1" viewBox="0 0 492.308 492.308" xml:space="preserve">
 <g>
 	<g>
 			<rect x="151.852" y="163.175" transform="matrix(0.9971 -0.0764 0.0764 0.9971 -21.7697 13.2064)" width="19.692" height="255.833"/>
@@ -22,28 +22,30 @@ const SVGLIXO = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www
 </svg>`;
 const ITEM = `
 <div class="border rounded-lg shadow bg-gray-800 border-gray-700">
-    <a href="#" class="flex justify-center">
+    <a class="flex justify-center">
         <img class="p-8 rounded-t-lg" src="uploads/_LINKIMAGEM_" alt="product image" />
     </a>
     <div class="px-5 pb-5">
-        <a href="#" class="break-all">
-            <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">_DESCRICAO_</h5>
-        </a>
-        <a href="#" class="break-all">
-            ${SVGLIXO}
+        <a class="break-all flex justify-center">
+            <h5 class="text-xl font-semibold mr-[15px] tracking-tight text-gray-900 dark:text-white">_DESCRICAO_</h5><button onclick="deletar(_ID_)">${SVGLIXO}</button>
         </a>
     </div>
 </div>
 `;
 $( document ).ready( async() => {
+    carregarItens();
+});
+
+async function carregarItens(){
     const resposta = await $.ajax({
-        url: 'https://rla-site.onrender.com/itens',
+        url: 'http://localhost:3000/itens',
         dataType: 'json',
         method: 'GET'
     });
     var ITENS = '';
     for(var i = 0; i < resposta.length; i++){
         ITENS += ITEM
+        .replace('_ID_', resposta[i].id)
         .replace('_LINKIMAGEM_', resposta[i].caminho)
         .replace('_DESCRICAO_', resposta[i].descricao);
     }
@@ -53,6 +55,15 @@ $( document ).ready( async() => {
         ${ITENS}
     </div>
     `);
-    $('#mobile-menu').addClass('mt-[-' + sh + 'px]')
-    $('#mobile-menu').removeClass('mt-16')
-});
+}
+
+async function deletar(id){
+    const resposta = await $.ajax({
+        url: 'http://localhost:3000/delete_files/' + `${id}`,
+        dataType: 'json',
+        method: 'GET'
+    });
+    if (resposta.status){
+        carregarItens();
+    }
+};

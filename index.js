@@ -65,13 +65,13 @@ app.get('/delete_files/:id', async (req, res) => {
     const item = await pool.query(
         `SELECT * FROM "Item" WHERE id = $1 LIMIT 1;`, [id]);
     const caminho = item.rows[0];
-    if(caminho == undefined) return res.json({status : 'Erro'})
+    if(caminho == undefined) return res.json({status : false})
     fs.unlink(`views/static/uploads/${caminho.caminho}`, function(err){
         if (err) console.log(err);
     });
     await pool.query(
         `DELETE FROM "Item" WHERE id = $1;`, [id]);
-    return res.json({status : 'Success'})
+    return res.json({status : true})
 });
 
 app.listen(3000);

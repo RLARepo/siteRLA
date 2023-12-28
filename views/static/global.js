@@ -62,14 +62,14 @@ const INFO = `
 </div>
 `;
 ITEM = `
-        <div class="border rounded-lg shadow bg-gray-800 border-gray-700">
-            <a href="#" class="flex justify-center">
-                <img class="p-8 rounded-t-lg" src="uploads/_LINKIMAGEM_" alt="product image" />
+    <div class="border rounded-lg shadow bg-gray-800 border-gray-700">
+        <a href="#" class="flex justify-center">
+            <img class="p-8 rounded-t-lg" src="uploads/_LINKIMAGEM_" alt="product image" />
+        </a>
+        <div class="px-5 pb-5">
+            <a href="#" class="break-all">
+                <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">_DESCRICAO_</h5>
             </a>
-            <div class="px-5 pb-5">
-                <a href="#" class="break-all">
-                    <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">_DESCRICAO_</h5>
-                </a>
-            </div>
         </div>
-    `;
+    </div>
+`;
