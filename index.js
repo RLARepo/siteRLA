@@ -66,7 +66,6 @@ const storage = multer.diskStorage({
         const descricaoProduto = req.body.descricao;
         const caminhoProduto = `${nomeProduto + Date.now() + path.extname(file.originalname)}`;
         cb(null, nomeProduto + Date.now() + path.extname(file.originalname));
-        criarProduto(nomeProduto, caminhoProduto, descricaoProduto);
     }
 });
 
@@ -95,6 +94,13 @@ app.get('/itens', async (req, res) => {
 });
 
 app.get('/upload', (req, res) => {
+    fs.readdir('./', (err, files) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log(files);
+    });
     res.render('../views/upload_img', {env : process.env.DIRETORIO});
 });
 
