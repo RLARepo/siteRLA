@@ -5,6 +5,48 @@ const path = require('path');
 const multer = require('multer');
 const fs = require('fs');
 require('dotenv').config();
+  
+const patha = "./uploads";
+  
+fs.access(patha, (error) => {
+   
+  // To check if the given directory 
+  // already exists or not
+  if (error) {
+    // If current directory does not exist
+    // then create it
+    fs.mkdir(patha, (error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("New Directory created successfully !!");
+      }
+    });
+  } else {
+    console.log("Given Directory already exists !!");
+  }
+});
+
+const patha2 = "./uploads/img";
+
+fs.access(patha2, (error) => {
+   
+    // To check if the given directory 
+    // already exists or not
+    if (error) {
+      // If current directory does not exist
+      // then create it
+      fs.mkdir(patha2, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("New Directory created successfully !!");
+        }
+      });
+    } else {
+      console.log("Given Directory already exists !!");
+    }
+  });
 
 app.set('view engine', 'ejs');
 
