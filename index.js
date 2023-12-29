@@ -8,7 +8,7 @@ require('dotenv').config();
 
 app.set('view engine', 'ejs');
 
-app.use(express.static(path.join(__dirname, '/views/static')));
+app.use(express.static(path.join(__dirname, '/')));
 
 const pool = new pg.Pool({
     connectionString : process.env.DB_URL,
@@ -53,14 +53,7 @@ app.get('/itens', async (req, res) => {
 });
 
 app.get('/upload', (req, res) => {
-    fs.readdir('./uploads/img', (err, files) => {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        res.render('../views/upload_img', {env : process.env.DIRETORIO});
-        return console.log({arquivos : files});
-      });
+    res.render('../views/upload_img', {env : process.env.DIRETORIO});
 });
 
 app.post('/upload_files', upload.single('file'), (req, res) => {
