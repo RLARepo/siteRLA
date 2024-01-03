@@ -7,12 +7,13 @@ const multer = require('multer');
 const fs = require('fs');
 require('dotenv').config();
 
-async function openDb () {
-  return open({
-    filename: './database.db',
-    driver: sqlite3.Database
-  })
-}
+var openDb = new sqlite3.Database(
+  "./database.db",
+  sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
+  function () {
+    console.log("Db opened");
+  }
+);
 
 app.set('view engine', 'ejs');
 
