@@ -1,4 +1,4 @@
-import { openDb } from './dataBase'
+import { openDb } from '../dataBase'
 
 const pg = require('pg');
 const express = require('express');
@@ -50,7 +50,7 @@ const storage = multer.diskStorage({
     },
     filename: async function(req, file, cb){
         const fileName = Date.now() + path.extname(file.originalname);
-        await db.run(
+        await openDb.run(
           'INSERT INTO produto(nome, descricao, caminho) VALUES (?, ?, ?);',
           req.body.nome,
           req.body.descricao,
@@ -67,7 +67,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/arquivos', async (req, res) => {
-  const result = await db.all('SELECT * FROM produto;');
+  const result = await openDb.all('SELECT * FROM produto;');
   return res.json({arquivos : result, status : true});
 });
 
