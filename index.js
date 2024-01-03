@@ -74,23 +74,17 @@ app.get('/upload', (req, res, file) => {
 });
 
 app.post('/upload_files', upload.single('file'), (req, res) => {
-  fs.readdir('uploads/img', (err, files) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    return res.json({status : true});
-  });
+  res.redirect('https://rla-site.onrender.com/upload');
 });
 
 app.get('/delete_files/:id', async (req, res) => {
-  fs.readdir('uploads/img', (err, files) => {
+  fs.readdir('views/static/uploads', (err, files) => {
     if (err) {
       console.error(err);
       res.json({status : false});
       return;
     }
-    fs.unlink(`uploads/img/${files[req.params.id]}`, function(err){
+    fs.unlink(`views/static/uploads/${files[req.params.id]}`, function(err){
       if (err) return res.json({status : false});
       return res.json({status : true});
     });
