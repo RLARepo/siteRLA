@@ -59,7 +59,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/arquivos', (req, res) => {
-  fs.readdir('uploads/img', (err, files) => {
+  fs.readdir('views/static/uploads', (err, files) => {
     if (err) {
       console.error(err);
       res.json({status : false});
