@@ -1,44 +1,18 @@
-import { openDb } from '../dataBase'
-
-const pg = require('pg');
+const sqlite3 = require('sqlite3');
+const { open } = require('sqlite');
 const express = require('express');
 const app = express();
 const path = require('path');
 const multer = require('multer');
 const fs = require('fs');
 require('dotenv').config();
-  
-const patha = "./uploads";
-  
-fs.access(patha, (error) => {
-  if (error) {
-    fs.mkdir(patha, (error) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("New Directory created successfully !!");
-      }
-    });
-  } else {
-    console.log("Given Directory already exists !!");
-  }
-});
 
-const patha2 = "./uploads/img";
-
-fs.access(patha2, (error) => {
-    if (error) {
-      fs.mkdir(patha2, (error) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("New Directory created successfully !!");
-        }
-      });
-    } else {
-      console.log("Given Directory already exists !!");
-    }
-  });
+async function openDb () {
+  return open({
+    filename: './database.db',
+    driver: sqlite3.Database
+  })
+}
 
 app.set('view engine', 'ejs');
 
