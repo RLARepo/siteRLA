@@ -44,11 +44,11 @@ app.use(express.static(path.join(__dirname, '/')));
 
 const storage = multer.diskStorage({
     destination : function(req, file, cb){
-        cb(null, 'uploads/img/');
+        cb(null, 'views/static/uploads/');
     },
     filename: function(req, file, cb){
-        const nomeProduto = req.body.produto;
-        cb(null, nomeProduto + Date.now() + path.extname(file.originalname));
+        const fileName = Date.now() + path.extname(file.originalname);
+        cb(null, fileName);
     }
 });
 
@@ -58,25 +58,43 @@ app.get('/', (req, res) => {
     res.render('../views/index', {env : process.env.DIRETORIO});
 });
 
-app.get('/upload', (req, res) => {
-    fs.readdir('uploads/img', (err, files) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      console.log(files);
-    });
+app.get('/arquivos', (req, res) => {
+  fs.readdir('uploads/img', (err, files) => {
+    if (err) {
+      console.error(err);
+      res.json({status : false});
+      return;
+    }
+    return res.json({arquivos : files, status : true});
+  });
+});
+
+app.get('/upload', (req, res, file) => {
     res.render('../views/upload_img', {env : process.env.DIRETORIO});
 });
 
 app.post('/upload_files', upload.single('file'), (req, res) => {
-    res.render('../views/upload_img', {env : process.env.DIRETORIO});
+  fs.readdir('uploads/img', (err, files) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    return res.json({status : true});
+  });
 });
 
 app.get('/delete_files/:id', async (req, res) => {
-    fs.unlink(`uploads/img/${caminho.caminho}`, function(err){
-        if (err);
+  fs.readdir('uploads/img', (err, files) => {
+    if (err) {
+      console.error(err);
+      res.json({status : false});
+      return;
+    }
+    fs.unlink(`uploads/img/${files[req.params.id]}`, function(err){
+      if (err) return res.json({status : false});
+      return res.json({status : true});
     });
+  });
 });
 
 app.listen(3000);
