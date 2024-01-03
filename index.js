@@ -1,3 +1,5 @@
+import { openDb } from './dataBase'
+
 const pg = require('pg');
 const express = require('express');
 const app = express();
@@ -46,8 +48,14 @@ const storage = multer.diskStorage({
     destination : function(req, file, cb){
         cb(null, 'views/static/uploads/');
     },
-    filename: function(req, file, cb){
+    filename: async function(req, file, cb){
         const fileName = Date.now() + path.extname(file.originalname);
+        await db.run(
+          'INSERT INTO produto(nome, descricao, caminho) VALUES (?, ?, ?);',
+          req.body.nome,
+          req.body.descricao,
+          fileName
+        );
         cb(null, fileName);
     }
 });
@@ -58,15 +66,9 @@ app.get('/', (req, res) => {
     res.render('../views/index', {env : process.env.DIRETORIO});
 });
 
-app.get('/arquivos', (req, res) => {
-  fs.readdir('views/static/uploads', (err, files) => {
-    if (err) {
-      console.error(err);
-      res.json({status : false});
-      return;
-    }
-    return res.json({arquivos : files, status : true});
-  });
+app.get('/arquivos', async (req, res) => {
+  const result = await db.all('SELECT * FROM produto;');
+  return res.json({arquivos : result, status : true});
 });
 
 app.get('/upload', (req, res, file) => {

@@ -23,8 +23,8 @@ $('#produtosNavSelect, #produtosNav').on('click', async () => {
     var ITENS = '';
     for(var i = 0; i < resposta.arquivos.length; i++){
         ITENS += ITEM
-        .replace('_LINKIMAGEM_', resposta.arquivos[i])
-        .replace('_DESCRICAO_', 'Foto' + (i + 1));
+        .replace('_LINKIMAGEM_', resposta.arquivos[i].caminho)
+        .replace('_DESCRICAO_',  resposta.arquivos[i].descricao);
     }
     $('#conteudo-html').html('');
     $('#conteudo-html').html(`
