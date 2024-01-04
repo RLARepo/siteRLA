@@ -56,17 +56,16 @@ app.post('/upload_files', upload.single('file'), (req, res) => {
 });
 
 app.get('/delete_files/:id', async (req, res) => {
-  fs.readdir('views/static/uploads', (err, files) => {
-    if (err) {
-      console.error(err);
-      res.json({status : false});
-      return;
-    }
-    fs.unlink(`views/static/uploads/${files[req.params.id]}`, function(err){
+  openDb.get('SELECT * FROM produto WHERE id = ?;', req.params.id, (err, row) => {
+    fs.unlink(`views/static/uploads/${row.caminho}`, function(err){
       if (err) return res.json({status : false});
       return res.json({status : true});
     });
   });
+  openDb.run(
+    'DELETE FROM produto WHERE id = ?;',
+    req.params.id
+  );
 });
 
 app.listen(3000);
