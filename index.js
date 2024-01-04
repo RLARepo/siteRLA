@@ -23,9 +23,9 @@ const storage = multer.diskStorage({
     destination : function(req, file, cb){
         cb(null, 'views/static/uploads/');
     },
-    filename: async function(req, file, cb){
+    filename: function(req, file, cb){
         const fileName = Date.now() + path.extname(file.originalname);
-        await openDb.run(
+        openDb.run(
           'INSERT INTO produto(nome, descricao, caminho) VALUES (?, ?, ?);',
           req.body.nome,
           req.body.descricao,
@@ -38,16 +38,17 @@ const storage = multer.diskStorage({
 const upload = multer({storage})
 
 app.get('/', (req, res) => {
-    res.render('../views/index', {env : process.env.DIRETORIO});
+  res.render('../views/index', {env : process.env.DIRETORIO});
 });
 
 app.get('/arquivos', async (req, res) => {
-  const result = await openDb.all('SELECT * FROM produto;');
-  return res.json({arquivos : result, status : true});
+  openDb.all('SELECT * FROM produto;', [], (err, rows) => {
+    return res.json({arquivos : rows, status : true});
+  });
 });
 
 app.get('/upload', (req, res, file) => {
-    res.render('../views/upload_img', {env : process.env.DIRETORIO});
+  res.render('../views/upload_img', {env : process.env.DIRETORIO});
 });
 
 app.post('/upload_files', upload.single('file'), (req, res) => {
