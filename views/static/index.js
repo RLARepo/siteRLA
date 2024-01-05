@@ -7,7 +7,6 @@ $('#mobile-menu').addClass('mt-[-' + sh + 'px]');
 $('#mobile-menu').removeClass('mt-16');
 
 $('#contatoNavSelect, #contatoNav').on('click', () => {
-    const mt = parseInt($('#mobile-menu').css('margin-top').replace(/[a-z]+/g, ''));
     $('#conteudo-html').html('');
     $('#conteudo-html').html(INFO);
     $('#mobile-menu').addClass('mt-[-' + sh + 'px]')
@@ -15,20 +14,21 @@ $('#contatoNavSelect, #contatoNav').on('click', () => {
 });
 
 $('#produtosNavSelect, #produtosNav').on('click', async () => {
-    const resposta = await $.ajax({
+    const {arquivos}= await $.ajax({
         url: '/arquivos',
         dataType: 'json',
         method: 'GET'
     });
     var ITENS = '';
-    for(var i = 0; i < resposta.arquivos.length; i++){
+    for(var i = 0; i < arquivos.length; i++){
         ITENS += ITEM
-        .replace('_LINKIMAGEM_', resposta.arquivos[i].caminho)
-        .replace('_DESCRICAO_',  resposta.arquivos[i].descricao);
+        .replace('_ID_', arquivos[i].id)
+        .replace('_DESCRICAO_',  arquivos[i].nome)
+        .replace('_LINKIMAGEM_', arquivos[i].caminho);
     }
     $('#conteudo-html').html('');
     $('#conteudo-html').html(`
-    <div class="listagem p-16 justify-center grid grid-flow-row-dense gap-20 font-mono text-white text-sm text-center font-bold leading-6 bg-stripes-purple rounded-lg">
+    <div class="listagem pt-16 justify-center grid grid-flow-row-dense gap-20 font-mono text-white text-sm text-center font-bold leading-6 bg-stripes-purple rounded-lg">
         ${ITENS}
     </div>
     `);
@@ -47,35 +47,21 @@ $('#show-itens').on('click', async () => {
     $('#mobile-menu').addClass('mt-16')
 });
 
-// $('.themeRange').on('click', () => {
-//     if($('.theme').css('right') == '33px'){
-//         SetTheme('dark', 'light');
-//         $('.theme').css('right', '1px');
-//         return
-//     }
-//     SetTheme('light', 'dark');
-//     $('.theme').css('right', '33px');
-// })
-
-// function SetTheme(temaAntigo, temaNovo) {
-//     let rul = window.document.styleSheets;
-//     for (i = 0; i < rul.length; i++) {
-//         let rules = rul[i].cssRules;
-//         for (j = 0; j < rules.length; j++) {
-//             media = rules[j].media
-//             if (media == undefined) {
-//                 continue;
-//             }
-//             if(rules[j].media.mediaText == '(prefers-color-scheme: dark)' || rules[j].media.mediaText == '(prefers-color-scheme: light)'){
-//                 rules[j].media.mediaText = rules[j].media.mediaText.replace(`prefers-color-scheme: ${temaAntigo}`, `prefers-color-scheme: ${temaNovo}`);
-//                 break;
-//             }
-//         }
-//     }
-// }
-
-// if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-//     $('.theme').css('right', '33px');
-// }else{
-//     $('.theme').css('right', '1px');
-// }
+async function carregarIten(id){
+    $('#conteudo-html').html('');
+    const {arquivo}= await $.ajax({
+        url: `/arquivos/${id}`,
+        dataType: 'json',
+        method: 'GET'
+    });
+    $('#conteudo-html').html(`
+    <div class="listagem justify-center font-mono text-white text-sm text-center font-bold leading-6 bg-stripes-purple rounded-lg">
+        ${
+            INFOPRODUTO
+            .replace('_NOME_', arquivo.nome)
+            .replace('_DESCRICAO_',  arquivo.descricao)
+            .replace('_LINKIMAGEM_', arquivo.caminho)
+        }
+    </div>
+    `);
+}

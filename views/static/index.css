@@ -2,16 +2,25 @@ body{
     margin: 0;
 }
 
+.navSelect{
+    cursor: pointer;
+}
+
 .listagem{
     grid-template-columns: repeat( auto-fit, minmax(230px, 230px) );
+}
+.itens{
+    display: grid;
+    align-items: end;
+    transition: 0.3s all;
+}
+.itens:hover{
+    transform: scale(1.06);
+}
+.itens:active{
+    transform: scale(0.93);
 }
 
 .card-fones, .card-adress, .card-work{
     background-color: #895831;
-}
-
-@media (prefers-color-scheme: dark) {
-    .dark\:bg-slate-950 {
-        background-color: rgb(2 6 23 / var(--tw-bg-opacity));
-    }
 }

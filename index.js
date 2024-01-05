@@ -7,7 +7,7 @@ const multer = require('multer');
 const fs = require('fs');
 require('dotenv').config();
 
-var openDb = new sqlite3.Database(
+const openDb = new sqlite3.Database(
   "./database.db",
   sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
   function () {
@@ -15,35 +15,42 @@ var openDb = new sqlite3.Database(
   }
 );
 
+const storage = multer.diskStorage({
+  destination : function(req, file, cb){
+      cb(null, 'views/static/uploads/');
+  },
+  filename: function(req, file, cb){
+      const fileName = Date.now() + path.extname(file.originalname);
+      openDb.run(
+        'INSERT INTO produto(nome, descricao, caminho) VALUES (?, ?, ?);',
+        req.body.nome,
+        req.body.descricao,
+        fileName
+      );
+      cb(null, fileName);
+  }
+});
+
+const upload = multer({storage});
+
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, '/')));
 
-const storage = multer.diskStorage({
-    destination : function(req, file, cb){
-        cb(null, 'views/static/uploads/');
-    },
-    filename: function(req, file, cb){
-        const fileName = Date.now() + path.extname(file.originalname);
-        openDb.run(
-          'INSERT INTO produto(nome, descricao, caminho) VALUES (?, ?, ?);',
-          req.body.nome,
-          req.body.descricao,
-          fileName
-        );
-        cb(null, fileName);
-    }
-});
-
-const upload = multer({storage})
-
 app.get('/', (req, res) => {
-  res.render('../views/index');
+  res.render('../views/index', {FUNCAO : {ACAO : "inicial"}});
 });
 
 app.get('/arquivos', async (req, res) => {
   openDb.all('SELECT * FROM produto;', [], (err, rows) => {
     return res.json({arquivos : rows, status : true});
+  });
+});
+
+app.get('/arquivos/:id', async (req, res) => {
+  openDb.get('SELECT * FROM produto WHERE id = ?;', req.params.id, (err, row) => {
+    if(!row){return res.json({status : false});}
+    return res.json({arquivo : row, status : true});
   });
 });
 
@@ -69,4 +76,4 @@ app.get('/delete_files/:id', async (req, res) => {
   });
 });
 
-app.listen(3000);
+app.listen(process.env.PORT | 3000);

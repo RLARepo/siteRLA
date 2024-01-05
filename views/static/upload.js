@@ -3,17 +3,17 @@ $( document ).ready( async() => {
 });
 
 async function carregarItens(){
-    const resposta = await $.ajax({
+    const {arquivos} = await $.ajax({
         url: '/arquivos',
         dataType: 'json',
         method: 'GET'
     });
     var ITENS = '';
-    for(var i = 0; i < resposta.arquivos.length; i++){
+    for(var i = 0; i < arquivos.length; i++){
         ITENS += ITEMEDIT
-        .replace('_ID_', resposta.arquivos[i].id)
-        .replace('_LINKIMAGEM_', resposta.arquivos[i].caminho)
-        .replace('_DESCRICAO_',  resposta.arquivos[i].descricao);
+        .replaceAll('_ID_', arquivos[i].id)
+        .replace('_DESCRICAO_',  arquivos[i].nome)
+        .replace('_LINKIMAGEM_', arquivos[i].caminho);
     }
     $('#conteudo-html').html('');
     $('#conteudo-html').html(`
@@ -22,9 +22,19 @@ async function carregarItens(){
     </div>
     `);
 }
+
+async function carregarIten(id){
+    const {arquivo}= await $.ajax({
+        url: `/arquivos/${id}`,
+        dataType: 'json',
+        method: 'GET'
+    });
+    console.log(arquivo)
+}
+
 async function deletar(id){
     const resposta = await $.ajax({
-        url: '/delete_files/' + `${id}`,
+        url: `/delete_files/${id}`,
         dataType: 'json',
         method: 'GET'
     });
