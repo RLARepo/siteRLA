@@ -52,7 +52,7 @@ app.get('/upload', (req, res, file) => {
 });
 
 app.post('/upload_files', upload.single('file'), (req, res) => {
-  res.redirect('https://rla-site.onrender.com/upload');
+  res.redirect(process.env.DIRETORIO + '/upload');
 });
 
 app.get('/delete_files/:id', async (req, res) => {
