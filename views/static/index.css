@@ -3,7 +3,7 @@ body{
 }
 
 .listagem{
-    grid-template-columns: repeat( auto-fit, minmax(230px, 0.5fr) );
+    grid-template-columns: repeat( auto-fit, minmax(230px, 230px) );
 }
 
 .card-fones, .card-adress, .card-work{
