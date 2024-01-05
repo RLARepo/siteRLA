@@ -1,6 +1,5 @@
 $( document ).ready(() => {
     $('#produtosNavSelect, #produtosNav').click();
-    console.log(DIRETORIO);
 })
 
 const sh = parseInt($('#mobile-menu').css('height').replace(/[a-z]+/g, '')) - 64;
@@ -17,7 +16,7 @@ $('#contatoNavSelect, #contatoNav').on('click', () => {
 
 $('#produtosNavSelect, #produtosNav').on('click', async () => {
     const resposta = await $.ajax({
-        url: DIRETORIO + '/arquivos',
+        url: '/arquivos',
         dataType: 'json',
         method: 'GET'
     });

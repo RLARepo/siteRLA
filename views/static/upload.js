@@ -1,11 +1,10 @@
 $( document ).ready( async() => {
     carregarItens();
-    console.log(DIRETORIO);
 });
 
 async function carregarItens(){
     const resposta = await $.ajax({
-        url: DIRETORIO + '/arquivos',
+        url: '/arquivos',
         dataType: 'json',
         method: 'GET'
     });
@@ -25,7 +24,7 @@ async function carregarItens(){
 }
 async function deletar(id){
     const resposta = await $.ajax({
-        url: DIRETORIO + '/delete_files/' + `${id}`,
+        url: '/delete_files/' + `${id}`,
         dataType: 'json',
         method: 'GET'
     });

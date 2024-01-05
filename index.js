@@ -38,7 +38,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage})
 
 app.get('/', (req, res) => {
-  res.render('../views/index', {env : process.env.DIRETORIO});
+  res.render('../views/index');
 });
 
 app.get('/arquivos', async (req, res) => {
@@ -48,7 +48,7 @@ app.get('/arquivos', async (req, res) => {
 });
 
 app.get('/upload', (req, res, file) => {
-  res.render('../views/upload_img', {env : process.env.DIRETORIO});
+  res.render('../views/upload');
 });
 
 app.post('/upload_files', upload.single('file'), (req, res) => {
