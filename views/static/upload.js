@@ -23,7 +23,7 @@ const SVGLIXO = `<svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30
 const ITEM = `
 <div class="border rounded-lg shadow bg-gray-800 border-gray-700">
     <a class="flex justify-center">
-        <img class="p-8 rounded-t-lg" src="views/static/uploads/_LINKIMAGEM_" alt="product image" />
+        <img class="p-8 rounded-t-lg" src="views/static/uploads/_LINKIMAGEM_" alt="product image" style="width: 200px;"/>
     </a>
     <div class="px-5 pb-5">
         <a class="break-all flex justify-center">
