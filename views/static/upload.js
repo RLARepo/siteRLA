@@ -34,11 +34,12 @@ const ITEM = `
 `;
 $( document ).ready( async() => {
     carregarItens();
+    console.log(DIRETORIO);
 });
 
 async function carregarItens(){
     const resposta = await $.ajax({
-        url: 'https://rla-site.onrender.com/arquivos',
+        url: DIRETORIO + '/arquivos',
         dataType: 'json',
         method: 'GET'
     });
@@ -58,7 +59,7 @@ async function carregarItens(){
 }
 async function deletar(id){
     const resposta = await $.ajax({
-        url: 'https://rla-site.onrender.com/delete_files/' + `${id}`,
+        url: DIRETORIO + '/delete_files/' + `${id}`,
         dataType: 'json',
         method: 'GET'
     });
