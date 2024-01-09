@@ -87,24 +87,25 @@ const INFO = `
     </div>
 </div>`;
 const INFOPRODUTO = `
-<div class="border rounded-lg shadow bg-gray-800 border-gray-700 flex flex-wrap justify-center" onclick="carregarIten(_ID_)">
-    <div class="pt-8 px-5 pb-5 w-[380px]">
-        <img class="p-8 rounded-t-lg" src="views/static/uploads/_LINKIMAGEM_" alt="product image" style="width: 350px;"/>
+<div class="border rounded-lg shadow bg-gray-800 border-gray-700 flex justify-center flex-wrap">
+    <div class="flex w-[300px]">
+        <div class="p-4 px-5">
+            <div class="flex">
+                <img class="rounded-lg" id="imgPrincipal" src="views/static/uploads/_LINKIMAGEM_" alt="product image"/>
+            </div>
+            <div id="imgSort" class="flex justify-center overflow-y-auto">
+                <div class="h-[50px] flex" id="subImgens">
+                    _SUBIMAGENS_
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pt-8 px-5 pb-5 w-[50%]" id="nomeDescricao">
         <a class="break-all">
-            <h5 class="text-xl font-semibold tracking-tight text-white">Nome : _NOME_</h5>
+            <h5 class="text-xl font-semibold tracking-tight text-white  mb-[12px]">Nome : _NOME_</h5>
         </a>
-    </div> 
-    <div class="pt-8 px-5 pb-5 w-[100%]">
         <a class="break-all">
             <h5 class="text-xl font-semibold tracking-tight text-white">Descrição : _DESCRICAO_</h5>
-        </a>
-    </div>
-    <div class="pt-8 px-5 pb-5">
-        <a class="break-all flex flex-wrap justify-center items-center">
-            ${SVGZAP}<h5 class="m-[12px] text-xl font-semibold tracking-tight text-lime-500"> Contato :  </h5><h5 class="text-xl font-semibold tracking-tight text-lime-500 m-[12px]"> (19) 99999-9999 </h5>
-            <button type="button" onclick="window.open('https://wa.me/19988512018', '_blank');" id="show-itens" class="m-[12px] text-xl font-semibold tracking-tight text-white bg-lime-500 relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-                Clique-Aqui
-            </button>
         </a>
     </div>
 </div>`;
@@ -130,3 +131,4 @@ const ITEMEDIT = `
         </a>
     </div>
 </div>`;
+const SUBIMAGEM = `<img class="p-[2px] rounded-lg" onclick="selecionado(_ID_, '_LINKIMAGEM_')" style="_SELECIONADO_" src="views/static/uploads/_LINKIMAGEM_" alt="product image"/>`

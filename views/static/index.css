@@ -20,7 +20,20 @@ body{
 .itens:active{
     transform: scale(0.93);
 }
-
+::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+}
+::-webkit-scrollbar-track {
+    background: #374151;    /* color of the tracking area */
+}
+::-webkit-scrollbar-thumb {
+    background-color: #171b20;    /* color of the scroll thumb */
+    border-radius: 3px;
+}
+* {
+    scrollbar-width: thin;
+    scrollbar-color: blue orange;
+  }
 .card-fones, .card-adress, .card-work{
     background-color: #895831;
 }

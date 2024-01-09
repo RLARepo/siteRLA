@@ -1,6 +1,19 @@
 $( document ).ready(() => {
     $('#produtosNavSelect, #produtosNav').click();
+    definirLargura();
 })
+
+window.addEventListener('resize', function () {
+    definirLargura();
+});
+
+function definirLargura(){
+    if (window.innerWidth < 892){
+        $('#nomeDescricao').css('width', '100%')
+    }else{
+        $('#nomeDescricao').css('width', '50%')
+    }
+}
 
 const sh = parseInt($('#mobile-menu').css('height').replace(/[a-z]+/g, '')) - 64;
 $('#mobile-menu').addClass('mt-[-' + sh + 'px]');
@@ -49,11 +62,28 @@ $('#show-itens').on('click', async () => {
 
 async function carregarIten(id){
     $('#conteudo-html').html('');
-    const {arquivo}= await $.ajax({
+    const {arquivo} = await $.ajax({
         url: `/arquivos/${id}`,
         dataType: 'json',
         method: 'GET'
     });
+    const {subArquivos} = await $.ajax({
+        url: `/sub_arquivos/${id}`,
+        dataType: 'json',
+        method: 'GET'
+    });
+    var subImagens = SUBIMAGEM
+    .replaceAll('_LINKIMAGEM_', arquivo.caminho)
+    .replace('_SELECIONADO_', 'border: solid 1px green;')
+    .replace('_ID_', 0);
+    var i = 1;
+    for(const item of subArquivos){
+        subImagens += SUBIMAGEM
+        .replaceAll('_LINKIMAGEM_', item.caminho)
+        .replace('_ID_', i);
+        i += 1;
+    }
+    `<img class="p-[2px] rounded-lg" src="views/static/uploads/_LINKIMAGEM_" alt="product image"/>`
     $('#conteudo-html').html(`
     <div class="listagem justify-center font-mono text-white text-sm text-center font-bold leading-6 bg-stripes-purple rounded-lg">
         ${
@@ -61,7 +91,21 @@ async function carregarIten(id){
             .replace('_NOME_', arquivo.nome)
             .replace('_DESCRICAO_',  arquivo.descricao)
             .replace('_LINKIMAGEM_', arquivo.caminho)
+            .replace('_SUBIMAGENS_', subImagens)
         }
     </div>
     `);
+    definirLargura();
+}
+
+function selecionado(id, novaImagem){
+    const itens = $('#subImgens > img');
+    for(var i = 0; i < itens.length; i++){
+        if(i == id){
+            itens[i].style.border = '1px solid green';
+            continue;
+        }
+        itens[i].style.border = '';
+    }
+    $('#imgPrincipal').attr('src', 'views/static/uploads/' + novaImagem);
 }

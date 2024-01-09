@@ -23,6 +23,57 @@ async function carregarItens(){
     `);
 }
 
+var inputFiles = [];
+
+$('#salvar').on('click', async() => {
+    const formData = new FormData();
+    const {arquivo} = await $.ajax({
+        url: '/ultimo_arquivo',
+        dataType: 'json',
+        method: 'GET'
+    });
+    formData.append('idProduto', arquivo);
+    formData.append('nome', $('#produto').val());
+    formData.append('descricao', $('#descricao').val());
+    for(const file of inputFiles){
+        formData.append('file[]', file);
+    }
+    await $.ajax({
+        url: '/upload_files',
+        dataType: 'json',
+        method: 'POST',
+        data: formData,
+        contentType: false,
+        cache: false,
+        processData: false
+    });
+    location.reload()
+})
+
+function newInput(input) {
+    var filesStr = "";
+  
+    for (let i = 0; i < input.files.length; i++) {
+      inputFiles.push(input.files[i]);
+      filesStr += `
+        <li class="mt-[12px]">
+            <button onclick="removeLi(this)" type="button" class="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remover</button>
+            ${input.files[i].name}
+        </li>`;
+    }
+  
+    $("#file").val('')
+  
+    $("#dp-files").append(filesStr)
+}
+
+function removeLi(e) {
+    inputFiles = inputFiles.filter(function(file) {
+      return file.name !== e.parentNode.innerHTML.split("<button")[0];
+    })
+    e.parentNode.parentNode.removeChild(e.parentNode);
+}
+
 async function carregarIten(id){
     const {arquivo}= await $.ajax({
         url: `/arquivos/${id}`,

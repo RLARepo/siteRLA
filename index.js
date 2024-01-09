@@ -15,18 +15,32 @@ const openDb = new sqlite3.Database(
   }
 );
 
+var i = 0;
+var idProduto = undefined;
+
 const storage = multer.diskStorage({
   destination : function(req, file, cb){
       cb(null, 'views/static/uploads/');
   },
-  filename: function(req, file, cb){
+  filename: async function(req, file, cb){
       const fileName = Date.now() + path.extname(file.originalname);
-      openDb.run(
-        'INSERT INTO produto(nome, descricao, caminho) VALUES (?, ?, ?);',
-        req.body.nome,
-        req.body.descricao,
-        fileName
-      );
+      if(i == 0){
+        idProduto = req.body.idProduto + 1;
+        openDb.run(
+          'INSERT INTO produto(id, nome, descricao, caminho) VALUES (?, ?, ?, ?);',
+          idProduto,
+          req.body.nome,
+          req.body.descricao,
+          fileName
+        );
+      }else{
+        openDb.run(
+          'INSERT INTO subImagem(id_produto, caminho) VALUES (?, ?);',
+          idProduto,
+          fileName
+        );
+      }
+      i += 1;
       cb(null, fileName);
   }
 });
@@ -54,15 +68,39 @@ app.get('/arquivos/:id', async (req, res) => {
   });
 });
 
+app.get('/sub_arquivos/:id', async (req, res) => {
+  openDb.all('SELECT * FROM subImagem WHERE id_produto = ?;', req.params.id, (err, rows) => {
+    if(!rows){return res.json({status : false});}
+    return res.json({subArquivos : rows, status : true});
+  });
+});
+
+app.get('/ultimo_arquivo', async (req, res) => {
+  openDb.get('SELECT MAX(id) AS id FROM produto;', [], (err, row) => {
+    return res.json({arquivo : row.id, status : true});
+  });
+});
+
 app.get('/upload', (req, res, file) => {
   res.render('../views/upload');
 });
 
-app.post('/upload_files', upload.single('file'), (req, res) => {
-  res.redirect(process.env.DIRETORIO + '/upload');
+app.post('/upload_files', upload.array('file[]', 10), (req, res) => {
+  i = 0
+  res.json({status : true});
 });
 
 app.get('/delete_files/:id', async (req, res) => {
+  console.log(req.params.id)
+  openDb.all('SELECT * FROM subImagem WHERE id_produto = ?;', req.params.id, (err, rows) => {
+    console.log(rows)
+    for(const row of rows){
+      console.log(row)
+      fs.unlink(`views/static/uploads/${row.caminho}`, function(err){
+        if (err){retorno = res.json({status : false})};
+      });
+    }
+  });
   openDb.get('SELECT * FROM produto WHERE id = ?;', req.params.id, (err, row) => {
     let retorno = res.json({status : true});
     fs.unlink(`views/static/uploads/${row.caminho}`, function(err){
@@ -70,8 +108,13 @@ app.get('/delete_files/:id', async (req, res) => {
     });
     openDb.run(
       'DELETE FROM produto WHERE id = ?;',
-      row.id
+      req.params.id
     );
+    openDb.run(
+      'DELETE FROM subImagem WHERE id_produto = ?;',
+      req.params.id
+    );
+    
     return retorno;
   });
 });
