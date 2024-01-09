@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
   },
   filename: async function(req, file, cb){
       const fileName = Date.now() + path.extname(file.originalname);
-      const id_produto = parseInt(req.body.idProduto) + 1 == undefined ? 1 : parseInt(req.body.idProduto) + 1;
+      const id_produto = parseInt(req.body.idProduto) == undefined ? 1 : parseInt(req.body.idProduto) + 1;
       if(i == 0){
         console.log(id_produto)
         console.log(i)
