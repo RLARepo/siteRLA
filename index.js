@@ -89,29 +89,29 @@ app.post('/upload_files', upload.array('file[]', 10), (req, res) => {
   res.json({status : true});
 });
 
-app.get('/delete_files/:id', async (req, res) => {
+app.get('/delete_files/:id', (req, res) => {
+  let retorno = {status : true};
   openDb.all('SELECT * FROM subImagem WHERE id_produto = ?;', req.params.id, (err, rows) => {
     for(const row of rows){
       fs.unlink(`views/static/uploads/${row.caminho}`, function(err){
-        if (err){retorno = res.json({status : false})};
+        if (err){retorno = {status : false}};
       });
     }
-  });
-  openDb.get('SELECT * FROM produto WHERE id = ?;', req.params.id, (err, row) => {
-    let retorno = res.json({status : true});
-    fs.unlink(`views/static/uploads/${row.caminho}`, function(err){
-      if (err){retorno = res.json({status : false})};
+    openDb.get('SELECT * FROM produto WHERE id = ?;', req.params.id, (err, row) => {
+      fs.unlink(`views/static/uploads/${row.caminho}`, function(err){
+        if (err){retorno = {status : false}};
+      });
+      openDb.run(
+        'DELETE FROM produto WHERE id = ?;',
+        req.params.id
+      );
+      openDb.run(
+        'DELETE FROM subImagem WHERE id_produto = ?;',
+        req.params.id
+      );
+      
+      return res.json(retorno);
     });
-    openDb.run(
-      'DELETE FROM produto WHERE id = ?;',
-      req.params.id
-    );
-    openDb.run(
-      'DELETE FROM subImagem WHERE id_produto = ?;',
-      req.params.id
-    );
-    
-    return retorno;
   });
 });
 

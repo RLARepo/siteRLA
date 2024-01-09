@@ -90,7 +90,7 @@ const INFOPRODUTO = `
 <div class="border rounded-lg shadow bg-gray-800 border-gray-700 flex justify-center flex-wrap">
     <div class="flex w-[300px]">
         <div class="p-4 px-5">
-            <div class="flex">
+            <div class="flex justify-center">
                 <img class="rounded-lg" id="imgPrincipal" src="views/static/uploads/_LINKIMAGEM_" alt="product image"/>
             </div>
             <div id="imgSort" class="flex justify-center overflow-y-auto">
