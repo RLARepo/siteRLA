@@ -25,6 +25,8 @@ const storage = multer.diskStorage({
       const fileName = Date.now() + path.extname(file.originalname);
       const id_produto = parseInt(req.body.idProduto) + 1;
       if(i == 0){
+        console.log(id_produto)
+        console.log(i)
         openDb.run(
           'INSERT INTO produto(id, nome, descricao, caminho) VALUES (?, ?, ?, ?);',
           id_produto,
@@ -33,6 +35,8 @@ const storage = multer.diskStorage({
           fileName
         );
       }else{
+        console.log(id_produto)
+        console.log(i)
         openDb.run(
           'INSERT INTO subImagem(id_produto, caminho) VALUES (?, ?);',
           id_produto,
@@ -90,11 +94,8 @@ app.post('/upload_files', upload.array('file[]', 10), (req, res) => {
 });
 
 app.get('/delete_files/:id', async (req, res) => {
-  console.log(req.params.id)
   openDb.all('SELECT * FROM subImagem WHERE id_produto = ?;', req.params.id, (err, rows) => {
-    console.log(rows)
     for(const row of rows){
-      console.log(row)
       fs.unlink(`views/static/uploads/${row.caminho}`, function(err){
         if (err){retorno = res.json({status : false})};
       });
