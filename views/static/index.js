@@ -9,33 +9,34 @@ $(document).ready(() => {
         case 'listar_item_descricao':
             listarItem(JSON.parse(PARAMS.replaceAll('&#34;', '"')).id);
             break
+        case 'contatos':
+            contatos();
+            break;
         default:
+            listarItens();
             break;
     }
     definirLargura();
 })
 
-$(window).on("load", function(){
-    console.log(window.innerWidth)
- });
+window.addEventListener('resize', function () {
+    definirLargura();
+});
 
 $('#produtosNavSelect, #produtosNav').on('click', async() => {
     window.location.href = '/listar_itens';
 });
 
-async function carregarIten(id){
+$('#contatoNavSelect, #contatoNav').on('click', async() => {
+    window.location.href = '/contatos';
+});
+
+function carregarIten(id){
     window.location.href = '/listar_item_descricao?id='+id;
 }
 
-window.addEventListener('resize', function () {
-    definirLargura();
-});
-
 function definirLargura(){
-    console.log(window.innerWidth)
-    console.log($('#descricaoItem'))
     if (window.innerWidth < 600){
-        console.log($('#descricaoItem'))
         $('#descricaoItem').addClass("flex-wrap justify-center");
     }else{
         $('#descricaoItem').removeClass("flex-wrap justify-center");
@@ -51,12 +52,12 @@ const sh = parseInt($('#mobile-menu').css('height').replace(/[a-z]+/g, '')) - 64
 $('#mobile-menu').addClass('mt-[-' + sh + 'px]');
 $('#mobile-menu').removeClass('mt-16');
 
-$('#contatoNavSelect, #contatoNav').on('click', () => {
+function contatos(){
     $('#conteudo-html').html('');
     $('#conteudo-html').html(INFO);
-    $('#mobile-menu').addClass('mt-[-' + sh + 'px]')
-    $('#mobile-menu').removeClass('mt-16')
-});
+    $('#mobile-menu').addClass('mt-[-' + sh + 'px]');
+    $('#mobile-menu').removeClass('mt-16');
+};
 
 $('#show-itens').on('click', async () => {
     const mt = parseInt($('#mobile-menu').css('margin-top').replace(/[a-z]+/g, ''));

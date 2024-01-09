@@ -55,7 +55,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/:funcao', (req, res) => {
-  console.log(req.query)
   res.render('../views/index', {FUNCAO : req.params.funcao, URLBASE : process.env.DIRETORIO, PARAMS : JSON.stringify(req.query)});
 });
 
