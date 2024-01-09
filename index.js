@@ -23,10 +23,8 @@ const storage = multer.diskStorage({
   },
   filename: async function(req, file, cb){
       const fileName = Date.now() + path.extname(file.originalname);
-      const id_produto = parseInt(req.body.idProduto) == undefined ? 1 : parseInt(req.body.idProduto) + 1;
+      const id_produto = req.body.idProduto == 'null' ? 1 : parseInt(req.body.idProduto) + 1;
       if(i == 0){
-        console.log(id_produto)
-        console.log(i)
         openDb.run(
           'INSERT INTO produto(id, nome, descricao, caminho) VALUES (?, ?, ?, ?);',
           id_produto,
@@ -35,8 +33,6 @@ const storage = multer.diskStorage({
           fileName
         );
       }else{
-        console.log(id_produto)
-        console.log(i)
         openDb.run(
           'INSERT INTO subImagem(id_produto, caminho) VALUES (?, ?);',
           id_produto,
