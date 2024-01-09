@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
   filename: async function(req, file, cb){
       const fileName = Date.now() + path.extname(file.originalname);
       if(i == 0){
-        idProduto = req.body.idProduto + 1;
+        idProduto = parseInt(req.body.idProduto) + 1;
         openDb.run(
           'INSERT INTO produto(id, nome, descricao, caminho) VALUES (?, ?, ?, ?);',
           idProduto,
