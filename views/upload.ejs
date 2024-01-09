@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <title>RLA</title>
-        <link rel="stylesheet" type="text/css" href="views/static/index.css"/>
-        <link rel="shortcut icon" href="views/static/icon/icon-marca.ico"/>
+        <link rel="stylesheet" type="text/css" href="<%= URLBASE %>/views/static/index.css"/>
+        <link rel="shortcut icon" href="<%= URLBASE %>/views/static/icon/icon-marca.ico"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
@@ -41,8 +41,11 @@
                 
             </div>
           </div>
+        <script>
+          const DIRETORIO = "<%= URLBASE %>";
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script type="text/javascript" src="views/static/global.js"></script>
-        <script type="text/javascript" src="views/static/upload.js"></script>
+        <script type="text/javascript" src="<%= URLBASE %>/views/static/global.js"></script>
+        <script type="text/javascript" src="<%= URLBASE %>/views/static/upload.js"></script>
     </body>
 </html>

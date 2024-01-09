@@ -87,11 +87,11 @@ const INFO = `
     </div>
 </div>`;
 const INFOPRODUTO = `
-<div class="border rounded-lg shadow bg-gray-800 border-gray-700 flex" id="descricaoItem">
+<div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex" id="descricaoItem">
     <div class="pt-4 flex w-[30%] min-w-[300px]" id="cardImgSubImg">
         <div class="p-4 px-5">
             <div class="flex justify-center">
-                <img class="rounded-lg" id="imgPrincipal" src="views/static/uploads/_LINKIMAGEM_" alt="product image"/>
+                <img class="rounded-md" id="imgPrincipal" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
             </div>
             <div id="imgSort" class="pt-4 flex justify-center overflow-y-auto">
                 <div class="h-[90px] flex" id="subImgens">
@@ -110,9 +110,9 @@ const INFOPRODUTO = `
     </div>
 </div>`;
 const ITEM = `
-<div class="itens border rounded-lg shadow bg-gray-800 border-gray-700" onclick="carregarIten(_ID_)">
+<div class="itens border-4 border-double rounded-md shadow bg-slate-900 border-sky-950" onclick="carregarIten(_ID_)">
     <a class="flex justify-center">
-        <img class="p-8 rounded-t-lg" src="views/static/uploads/_LINKIMAGEM_" alt="product image" style="width: 200px;"/>
+        <img class="p-8 rounded-t-lg" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image" style="width: 200px;"/>
     </a>
     <div class="px-5 pb-5">
         <a class="break-all">
@@ -121,9 +121,9 @@ const ITEM = `
     </div>
 </div>`;
 const ITEMEDIT = `
-<div class="itens border rounded-lg shadow bg-gray-800 border-gray-700" onclick="carregarIten(_ID_)">
+<div class="itens border-4 border-double rounded-lg shadow bg-slate-900 border-sky-950" onclick="carregarIten(_ID_)">
     <a class="flex justify-center">
-        <img class="p-8 rounded-t-lg" src="views/static/uploads/_LINKIMAGEM_" alt="product image" style="width: 200px;"/>
+        <img class="p-8 rounded-t-lg" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image" style="width: 200px;"/>
     </a>
     <div class="px-5 pb-5">
         <a class="break-all flex justify-center">
@@ -131,4 +131,4 @@ const ITEMEDIT = `
         </a>
     </div>
 </div>`;
-const SUBIMAGEM = `<img class="p-[2px] rounded-lg" onmouseenter="selecionado(_ID_, '_LINKIMAGEM_')" style="_SELECIONADO_" src="views/static/uploads/_LINKIMAGEM_" alt="product image"/>`
+const SUBIMAGEM = `<img class="p-[2px] rounded-md" onmouseenter="selecionado(_ID_, '_LINKIMAGEM_')" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>`

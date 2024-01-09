@@ -51,45 +51,50 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, '/')));
 
 app.get('/', (req, res) => {
-  res.render('../views/index', {FUNCAO : {ACAO : "inicial"}});
+  res.render('../views/index', {FUNCAO : "inicial", URLBASE : process.env.DIRETORIO, PARAMS : JSON.stringify(req.query)});
 });
 
-app.get('/arquivos', async (req, res) => {
+app.get('/:funcao', (req, res) => {
+  console.log(req.query)
+  res.render('../views/index', {FUNCAO : req.params.funcao, URLBASE : process.env.DIRETORIO, PARAMS : JSON.stringify(req.query)});
+});
+
+app.get('/funcao/arquivos', async (req, res) => {
   openDb.all('SELECT * FROM produto;', [], (err, rows) => {
     return res.json({arquivos : rows, status : true});
   });
 });
 
-app.get('/arquivos/:id', async (req, res) => {
+app.get('/funcao/arquivos/:id', async (req, res) => {
   openDb.get('SELECT * FROM produto WHERE id = ?;', req.params.id, (err, row) => {
     if(!row){return res.json({status : false});}
     return res.json({arquivo : row, status : true});
   });
 });
 
-app.get('/sub_arquivos/:id', async (req, res) => {
+app.get('/funcao/sub_arquivos/:id', async (req, res) => {
   openDb.all('SELECT * FROM subImagem WHERE id_produto = ?;', req.params.id, (err, rows) => {
     if(!rows){return res.json({status : false});}
     return res.json({subArquivos : rows, status : true});
   });
 });
 
-app.get('/ultimo_arquivo', async (req, res) => {
+app.get('/funcao/ultimo_arquivo', async (req, res) => {
   openDb.get('SELECT MAX(id) AS id FROM produto;', [], (err, row) => {
     return res.json({arquivo : row.id, status : true});
   });
 });
 
-app.get('/upload', (req, res, file) => {
-  res.render('../views/upload');
+app.get('/funcao/upload', (req, res, file) => {
+  res.render('../views/upload', {URLBASE : process.env.DIRETORIO});
 });
 
-app.post('/upload_files', upload.array('file[]', 10), (req, res) => {
+app.post('/funcao/upload_files', upload.array('file[]', 10), (req, res) => {
   i = 0
   res.json({status : true});
 });
 
-app.get('/delete_files/:id', (req, res) => {
+app.get('/funcao/delete_files/:id', (req, res) => {
   let retorno = {status : true};
   openDb.all('SELECT * FROM subImagem WHERE id_produto = ?;', req.params.id, (err, rows) => {
     for(const row of rows){

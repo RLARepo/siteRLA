@@ -4,7 +4,7 @@ $( document ).ready( async() => {
 
 async function carregarItens(){
     const {arquivos} = await $.ajax({
-        url: '/arquivos',
+        url: DIRETORIO + '/funcao/arquivos',
         dataType: 'json',
         method: 'GET'
     });
@@ -28,7 +28,7 @@ var inputFiles = [];
 $('#salvar').on('click', async() => {
     const formData = new FormData();
     const {arquivo} = await $.ajax({
-        url: '/ultimo_arquivo',
+        url: DIRETORIO + '/funcao/ultimo_arquivo',
         dataType: 'json',
         method: 'GET'
     });
@@ -39,7 +39,7 @@ $('#salvar').on('click', async() => {
         formData.append('file[]', file);
     }
     await $.ajax({
-        url: '/upload_files',
+        url: DIRETORIO + '/funcao/upload_files',
         dataType: 'json',
         method: 'POST',
         data: formData,
@@ -76,7 +76,7 @@ function removeLi(e) {
 
 async function carregarIten(id){
     const {arquivo}= await $.ajax({
-        url: `/arquivos/${id}`,
+        url: DIRETORIO + `/funcao/arquivos/${id}`,
         dataType: 'json',
         method: 'GET'
     });
@@ -85,7 +85,7 @@ async function carregarIten(id){
 
 async function deletar(id){
     const resposta = await $.ajax({
-        url: `/delete_files/${id}`,
+        url: DIRETORIO + `/funcao/delete_files/${id}`,
         dataType: 'json',
         method: 'GET'
     });

@@ -1,14 +1,41 @@
-$( document ).ready(() => {
-    $('#produtosNavSelect, #produtosNav').click();
+$(document).ready(() => {
+    switch (FUNCAO) {
+        case 'inicial':
+            listarItens();
+            break;
+        case 'listar_itens':
+            listarItens();
+            break
+        case 'listar_item_descricao':
+            listarItem(JSON.parse(PARAMS.replaceAll('&#34;', '"')).id);
+            break
+        default:
+            break;
+    }
     definirLargura();
 })
+
+$(window).on("load", function(){
+    console.log(window.innerWidth)
+ });
+
+$('#produtosNavSelect, #produtosNav').on('click', async() => {
+    window.location.href = '/listar_itens';
+});
+
+async function carregarIten(id){
+    window.location.href = '/listar_item_descricao?id='+id;
+}
 
 window.addEventListener('resize', function () {
     definirLargura();
 });
 
 function definirLargura(){
+    console.log(window.innerWidth)
+    console.log($('#descricaoItem'))
     if (window.innerWidth < 600){
+        console.log($('#descricaoItem'))
         $('#descricaoItem').addClass("flex-wrap justify-center");
     }else{
         $('#descricaoItem').removeClass("flex-wrap justify-center");
@@ -31,9 +58,20 @@ $('#contatoNavSelect, #contatoNav').on('click', () => {
     $('#mobile-menu').removeClass('mt-16')
 });
 
-$('#produtosNavSelect, #produtosNav').on('click', async () => {
+$('#show-itens').on('click', async () => {
+    const mt = parseInt($('#mobile-menu').css('margin-top').replace(/[a-z]+/g, ''));
+    if(mt > 0){
+        $('#mobile-menu').addClass('mt-[-' + sh + 'px]')
+        $('#mobile-menu').removeClass('mt-16')
+        return
+    }
+    $('#mobile-menu').removeClass('mt-[-' + sh + 'px]')
+    $('#mobile-menu').addClass('mt-16')
+});
+
+async function listarItens(){
     const {arquivos}= await $.ajax({
-        url: '/arquivos',
+        url: '/funcao/arquivos',
         dataType: 'json',
         method: 'GET'
     });
@@ -51,29 +89,19 @@ $('#produtosNavSelect, #produtosNav').on('click', async () => {
     </div>
     `);
     $('#mobile-menu').addClass('mt-[-' + sh + 'px]')
-    $('#mobile-menu').removeClass('mt-16')
-});
+    $('#mobile-menu').removeClass('mt-16');
+    definirLargura();
+};
 
-$('#show-itens').on('click', async () => {
-    const mt = parseInt($('#mobile-menu').css('margin-top').replace(/[a-z]+/g, ''));
-    if(mt > 0){
-        $('#mobile-menu').addClass('mt-[-' + sh + 'px]')
-        $('#mobile-menu').removeClass('mt-16')
-        return
-    }
-    $('#mobile-menu').removeClass('mt-[-' + sh + 'px]')
-    $('#mobile-menu').addClass('mt-16')
-});
-
-async function carregarIten(id){
+async function listarItem(id){
     $('#conteudo-html').html('');
     const {arquivo} = await $.ajax({
-        url: `/arquivos/${id}`,
+        url: `/funcao/arquivos/${id}`,
         dataType: 'json',
         method: 'GET'
     });
     const {subArquivos} = await $.ajax({
-        url: `/sub_arquivos/${id}`,
+        url: `/funcao/sub_arquivos/${id}`,
         dataType: 'json',
         method: 'GET'
     });
@@ -101,7 +129,7 @@ async function carregarIten(id){
     </div>
     `);
     definirLargura();
-}
+};
 
 function selecionado(id, novaImagem){
     const itens = $('#subImgens > img');
