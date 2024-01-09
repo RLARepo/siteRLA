@@ -16,7 +16,6 @@ const openDb = new sqlite3.Database(
 );
 
 var i = 0;
-var idProduto = undefined;
 
 const storage = multer.diskStorage({
   destination : function(req, file, cb){
@@ -24,11 +23,11 @@ const storage = multer.diskStorage({
   },
   filename: async function(req, file, cb){
       const fileName = Date.now() + path.extname(file.originalname);
+      const id_produto = parseInt(req.body.idProduto) + 1;
       if(i == 0){
-        idProduto = parseInt(req.body.idProduto) + 1;
         openDb.run(
           'INSERT INTO produto(id, nome, descricao, caminho) VALUES (?, ?, ?, ?);',
-          idProduto,
+          id_produto,
           req.body.nome,
           req.body.descricao,
           fileName
@@ -36,7 +35,7 @@ const storage = multer.diskStorage({
       }else{
         openDb.run(
           'INSERT INTO subImagem(id_produto, caminho) VALUES (?, ?);',
-          idProduto,
+          id_produto,
           fileName
         );
       }
