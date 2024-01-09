@@ -87,20 +87,20 @@ const INFO = `
     </div>
 </div>`;
 const INFOPRODUTO = `
-<div class="border rounded-lg shadow bg-gray-800 border-gray-700 flex justify-center flex-wrap">
-    <div class="flex w-[300px]">
+<div class="border rounded-lg shadow bg-gray-800 border-gray-700 flex" id="descricaoItem">
+    <div class="pt-4 flex w-[30%] min-w-[300px]" id="cardImgSubImg">
         <div class="p-4 px-5">
             <div class="flex justify-center">
                 <img class="rounded-lg" id="imgPrincipal" src="views/static/uploads/_LINKIMAGEM_" alt="product image"/>
             </div>
-            <div id="imgSort" class="flex justify-center overflow-y-auto">
-                <div class="h-[50px] flex" id="subImgens">
+            <div id="imgSort" class="pt-4 flex justify-center overflow-y-auto">
+                <div class="h-[90px] flex" id="subImgens">
                     _SUBIMAGENS_
                 </div>
             </div>
         </div>
     </div>
-    <div class="pt-8 px-5 pb-5 w-[50%]" id="nomeDescricao">
+    <div class="pt-8 px-5 pb-5" id="nomeDescricao">
         <a class="break-all">
             <h5 class="text-xl font-semibold tracking-tight text-white  mb-[12px]">Nome : _NOME_</h5>
         </a>
@@ -131,4 +131,4 @@ const ITEMEDIT = `
         </a>
     </div>
 </div>`;
-const SUBIMAGEM = `<img class="p-[2px] rounded-lg" onclick="selecionado(_ID_, '_LINKIMAGEM_')" style="_SELECIONADO_" src="views/static/uploads/_LINKIMAGEM_" alt="product image"/>`
+const SUBIMAGEM = `<img class="p-[2px] rounded-lg" onmouseenter="selecionado(_ID_, '_LINKIMAGEM_')" style="_SELECIONADO_" src="views/static/uploads/_LINKIMAGEM_" alt="product image"/>`

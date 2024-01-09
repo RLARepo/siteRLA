@@ -8,10 +8,15 @@ window.addEventListener('resize', function () {
 });
 
 function definirLargura(){
-    if (window.innerWidth < 892){
-        $('#nomeDescricao').css('width', '100%')
+    if (window.innerWidth < 600){
+        $('#descricaoItem').addClass("flex-wrap justify-center");
     }else{
-        $('#nomeDescricao').css('width', '50%')
+        $('#descricaoItem').removeClass("flex-wrap justify-center");
+    }
+    if(window.innerWidth < 350){
+        $('#cardImgSubImg').addClass("min-w-[225px]");
+    }else{
+        $('#cardImgSubImg').removeClass("min-w-[225px]"); 
     }
 }
 
