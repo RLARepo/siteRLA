@@ -100,7 +100,7 @@ const INFOPRODUTOMOBILE = `
             </div>
         </div>
     </div>
-    <div class="pt-8 px-5 pb-5 w-[80%]" id="nomeDescricao">
+    <div class="pt-8 pb-5 w-[80%]" id="nomeDescricao">
         <a class="break-all">
             <h5 class="text-xl font-semibold tracking-tight text-white  mb-[12px]">Nome : _NOME_</h5>
         </a>
@@ -111,21 +111,21 @@ const INFOPRODUTOMOBILE = `
 </div>`;
 const INFOPRODUTOPC = `
 <div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex" id="descricaoItem">
-    <div class="pt-4 flex w-[20%] min-w-[300px]" id="cardImgSubImg">
+    <div class="pt-4 flex w-[21%] min-w-[300px]" id="cardImgSubImg">
         <div class="p-4 px-5">
             <div class="flex justify-center">
                 <img class="rounded-md" id="imgPrincipal" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
             </div>
         </div>
     </div>
-    <div class="pt-8 w-[10%] min-w-[90px]" id="cardImgSubImg">
+    <div class="pt-8 w-[9%]" id="cardImgSubImg">
         <div id="imgSort" class=" flex justify-center overflow-y-auto">
             <div class="h-[230px]" id="subImgens">
                 _SUBIMAGENS_
             </div>
         </div>
     </div>
-    <div class="pt-8 px-5 pb-5 w-[70%]" id="nomeDescricao">
+    <div class="pt-8 pb-5 w-[70%]" id="nomeDescricao">
         <a class="break-all">
             <h5 class="text-xl font-semibold tracking-tight text-white  mb-[12px]">Nome : _NOME_</h5>
         </a>
@@ -156,4 +156,5 @@ const ITEMEDIT = `
         </a>
     </div>
 </div>`;
-const SUBIMAGEM = `<img class="p-[2px] rounded-md" onmouseenter="selecionado(_ID_, '_LINKIMAGEM_')" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>`
+const SUBIMAGEMPC = `<img class="p-[2px] rounded-md" onmouseenter="selecionado(_ID_, '_LINKIMAGEM_')" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>`
+const SUBIMAGEMMOBILE = `<img class="p-[2px] rounded-md" onclick="selecionado(_ID_, '_LINKIMAGEM_')" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>`

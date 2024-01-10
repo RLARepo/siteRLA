@@ -148,13 +148,20 @@ async function listarItem(id){
         dataType: 'json',
         method: 'GET'
     });
-    var subImagens = SUBIMAGEM
+    var subImagensPc = SUBIMAGEMPC
+    .replaceAll('_LINKIMAGEM_', arquivo.caminho)
+    .replace('_SELECIONADO_', 'border: solid 1px green;')
+    .replace('_ID_', 0);
+    var subImagensMobile = SUBIMAGEMMOBILE
     .replaceAll('_LINKIMAGEM_', arquivo.caminho)
     .replace('_SELECIONADO_', 'border: solid 1px green;')
     .replace('_ID_', 0);
     var i = 1;
     for(const item of subArquivos){
-        subImagens += SUBIMAGEM
+        subImagensMobile += SUBIMAGEMMOBILE
+        .replaceAll('_LINKIMAGEM_', item.caminho)
+        .replace('_ID_', i);
+        subImagensPc += SUBIMAGEMPC
         .replaceAll('_LINKIMAGEM_', item.caminho)
         .replace('_ID_', i);
         i += 1;
@@ -163,12 +170,12 @@ async function listarItem(id){
     .replace('_NOME_', arquivo.nome)
     .replace('_DESCRICAO_',  arquivo.descricao)
     .replace('_LINKIMAGEM_', arquivo.caminho)
-    .replace('_SUBIMAGENS_', subImagens);
+    .replace('_SUBIMAGENS_', subImagensMobile);
     itensRenderizados.INFOPRODUTOPC = INFOPRODUTOPC
     .replace('_NOME_', arquivo.nome)
     .replace('_DESCRICAO_',  arquivo.descricao)
     .replace('_LINKIMAGEM_', arquivo.caminho)
-    .replace('_SUBIMAGENS_', subImagens)
+    .replace('_SUBIMAGENS_', subImagensPc)
     $('#conteudo-html').html(`
     <div class="listagem justify-center font-mono text-white text-sm text-center font-bold leading-6 bg-stripes-purple rounded-lg">
         ${
