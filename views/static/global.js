@@ -86,9 +86,9 @@ const INFO = `
         </div>
     </div>
 </div>`;
-const INFOPRODUTO = `
+const INFOPRODUTOMOBILE = `
 <div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex" id="descricaoItem">
-    <div class="pt-4 flex w-[30%] min-w-[300px]" id="cardImgSubImg">
+    <div class="pt-4 flex w-[20%] min-w-[300px]" id="cardImgSubImg">
         <div class="p-4 px-5">
             <div class="flex justify-center">
                 <img class="rounded-md" id="imgPrincipal" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
@@ -100,7 +100,32 @@ const INFOPRODUTO = `
             </div>
         </div>
     </div>
-    <div class="pt-8 px-5 pb-5" id="nomeDescricao">
+    <div class="pt-8 px-5 pb-5 w-[80%]" id="nomeDescricao">
+        <a class="break-all">
+            <h5 class="text-xl font-semibold tracking-tight text-white  mb-[12px]">Nome : _NOME_</h5>
+        </a>
+        <a class="break-all">
+            <h5 class="text-xl font-semibold tracking-tight text-white">Descrição : _DESCRICAO_</h5>
+        </a>
+    </div>
+</div>`;
+const INFOPRODUTOPC = `
+<div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex" id="descricaoItem">
+    <div class="pt-4 flex w-[20%] min-w-[300px]" id="cardImgSubImg">
+        <div class="p-4 px-5">
+            <div class="flex justify-center">
+                <img class="rounded-md" id="imgPrincipal" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
+            </div>
+        </div>
+    </div>
+    <div class="pt-8 w-[10%] min-w-[90px]" id="cardImgSubImg">
+        <div id="imgSort" class=" flex justify-center overflow-y-auto">
+            <div class="h-[230px]" id="subImgens">
+                _SUBIMAGENS_
+            </div>
+        </div>
+    </div>
+    <div class="pt-8 px-5 pb-5 w-[70%]" id="nomeDescricao">
         <a class="break-all">
             <h5 class="text-xl font-semibold tracking-tight text-white  mb-[12px]">Nome : _NOME_</h5>
         </a>
