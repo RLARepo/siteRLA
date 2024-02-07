@@ -24,20 +24,49 @@ const storage = multer.diskStorage({
   filename: async function(req, file, cb){
       const fileName = Date.now() + path.extname(file.originalname);
       const id_produto = req.body.idProduto == 'null' ? 1 : parseInt(req.body.idProduto) + 1;
+      const listaItens = req.body.antesDepois.split(',');
+      tipo = listaItens.includes(`${i}`) ? 'AT' : 'NM';
+      subTipo = listaItens.includes(`${i - 1}`) ? 'AT' : 'NM';
+      console.log(listaItens, subTipo, i)
+      
       if(i == 0){
         openDb.run(
-          'INSERT INTO produto(id, nome, descricao, caminho) VALUES (?, ?, ?, ?);',
+          'INSERT INTO produto(id, nome, descricao, caminho, tipo, referencia) VALUES (?, ?, ?, ?, ?, ?);',
           id_produto,
           req.body.nome,
           req.body.descricao,
-          fileName
+          fileName,
+          tipo,
+          ''
         );
       }else{
-        openDb.run(
-          'INSERT INTO subImagem(id_produto, caminho) VALUES (?, ?);',
-          id_produto,
-          fileName
-        );
+        const subItem = i;
+        
+        if(listaItens.includes(`${i - 1}`)){
+          openDb.get('SELECT MAX(id) AS id FROM subImagem WHERE id_produto = ?;', id_produto, (err, row) => {
+            if(subItem == 1){
+              openDb.run(
+                'UPDATE produto SET referencia = ? WHERE id = ?;',
+                fileName,
+                id_produto
+              );
+            }else{
+              openDb.run(
+                'UPDATE subImagem SET referencia = ? WHERE id = ?;',
+                fileName,
+                row.id
+              );
+            }
+          });
+        }else{
+          openDb.run(
+            'INSERT INTO subImagem(id_produto, caminho, tipo, referencia) VALUES (?, ?, ?, ?);',
+            id_produto,
+            fileName,
+            subTipo,
+            ''
+          );
+        }
       }
       i += 1;
       cb(null, fileName);
@@ -88,7 +117,7 @@ app.get('/funcao/upload', (req, res, file) => {
   res.render('../views/upload', {URLBASE : process.env.DIRETORIO});
 });
 
-app.post('/funcao/upload_files', upload.array('file[]', 10), (req, res) => {
+app.post('/funcao/upload_files', upload.array('file[]'), (req, res) => {
   i = 0
   res.json({status : true});
 });
