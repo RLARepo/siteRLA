@@ -59,16 +59,21 @@ function definirLargura(){
 
 function mudaLayoutAntesDepois(){
     if(window.innerWidth < 760 && window.innerWidth > 530){
-        console.log('a')
         $('#avancar').removeClass('ml-[90px]');
         $('#voltar').removeClass('mr-[90px]');
+        $('#voltar').addClass('ml-[8px]');
+        $('#avancar').addClass('mr-[8px]');
     }else if(window.innerWidth > 760){
         $('#avancar').addClass('ml-[90px]');
         $('#voltar').addClass('mr-[90px]');
+        $('#voltar').removeClass('ml-[8px]');
+        $('#avancar').removeClass('mr-[8px]');
     }
     if (window.innerWidth < 760){
         $('#avancar').removeClass('ml-[90px]');
         $('#voltar').removeClass('mr-[90px]');
+        $('#voltar').addClass('ml-[8px]');
+        $('#avancar').addClass('mr-[8px]');
         $('#imgPrincipal > img').removeClass("mr-[12px]");
         $('#imgPrincipal > img').removeClass("ml-[12px]");
         $('#imgPrincipal > img').addClass("mb-[12px]");

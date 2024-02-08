@@ -24,7 +24,7 @@ const SVGLOCAL = `
     </g>
 </svg>`;
 const SVGMAIOR = `
-<svg xmlns="http://www.w3.org/2000/svg" class="svgMaior" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#e5e7eb" version="1.1" id="Capa_1" width="30px" height="30px" viewBox="0 0 103.536 103.536" xml:space="preserve">
+<svg xmlns="http://www.w3.org/2000/svg" class="svgMaior" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#808080" version="1.1" id="Capa_1" width="30px" height="30px" viewBox="0 0 103.536 103.536" xml:space="preserve">
 <g>
 	<g>
 		<path d="M0.65,91.928c1.221,2.701,3.881,4.3,6.665,4.3c1.006,0,2.029-0.209,3.006-0.65l88.917-40.195    c2.688-1.216,4.381-3.925,4.295-6.873c-0.085-2.948-1.934-5.554-4.687-6.609L9.929,7.794C6.17,6.352,1.933,8.23,0.489,12.001    c-1.447,3.769,0.438,7.995,4.207,9.44l72.569,27.834L4.299,82.255C0.62,83.92-1.012,88.249,0.65,91.928z"/>
@@ -33,7 +33,7 @@ const SVGMAIOR = `
 </svg>
 `;
 const SVGMENOR = `
-<svg xmlns="http://www.w3.org/2000/svg" class="svgMenor" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#e5e7eb" version="1.1" id="Capa_1" width="30px" height="30px" viewBox="0 0 103.537 103.537" xml:space="preserve">
+<svg xmlns="http://www.w3.org/2000/svg" class="svgMenor" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#808080" version="1.1" id="Capa_1" width="30px" height="30px" viewBox="0 0 103.537 103.537" xml:space="preserve">
 <g>
 	<g>
 		<path d="M103.048,12.002c-1.445-3.771-5.679-5.649-9.438-4.207L4.692,41.9c-2.753,1.055-4.603,3.662-4.688,6.609    c-0.087,2.948,1.608,5.656,4.295,6.872l88.917,40.196c0.978,0.44,2,0.65,3.006,0.65c2.784,0,5.442-1.6,6.665-4.302    c1.661-3.678,0.029-8.007-3.648-9.671L26.273,49.277l72.568-27.834C102.61,19.998,104.496,15.771,103.048,12.002z"/>
@@ -110,11 +110,11 @@ const INFO = `
 </div>`;
 const INFOPRODUTOMOBILE = `
 <div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex flex-col items-center" id="descricaoItem">
-    <div class="flex justify-center items-center min-w-[360px]"> 
+    <div class="flex justify-center items-center"> 
         <div onclick="voltar()" id="voltar" class="opacity-0">
             ${SVGMENOR}
         </div>       
-        <div class="pt-4 flex justify-center w-[20%] min-w-[300px]" id="cardImgSubImg">
+        <div class="pt-4 flex justify-center w-[20%] min-w-[150px]" id="cardImgSubImg">
             <div class="p-4 px-5">
                 <div class="flex justify-center items-center duration-200" id="imgPrincipal">
                     <img class="rounded-md max-w-[70%]" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
@@ -136,11 +136,11 @@ const INFOPRODUTOMOBILE = `
 </div>`;
 const INFOPRODUTOPC = `
 <div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex flex-col items-center" id="descricaoItem">
-    <div class="flex justify-center items-center min-w-[360px]">
+    <div class="flex justify-center items-center">
         <div onclick="voltar()" id="voltar" class="opacity-0">
             ${SVGMENOR}
         </div>
-        <div class="pt-4 justify-center flex w-[21%] min-w-[300px]" id="cardImgSubImg">
+        <div class="pt-4 justify-center flex w-[21%] min-w-[150px]" id="cardImgSubImg">
             <div class="p-4 px-5">
                 <div class="flex">
                     <div class="flex justify-center items-center duration-200" id="imgPrincipal">
