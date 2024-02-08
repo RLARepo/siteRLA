@@ -110,14 +110,14 @@ const INFO = `
 </div>`;
 const INFOPRODUTOMOBILE = `
 <div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex flex-col items-center" id="descricaoItem">
-    <div class="flex justify-center items-center"> 
+    <div class="flex justify-center items-center min-h-[400px]"> 
         <div onclick="voltar()" id="voltar" class="opacity-0">
             ${SVGMENOR}
         </div>       
         <div class="pt-4 flex justify-center w-[20%] min-w-[150px]" id="cardImgSubImg">
             <div class="p-4 px-5">
                 <div class="flex justify-center items-center duration-200" id="imgPrincipal">
-                    <img class="rounded-md max-w-[70%]" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
+                    <img class="rounded-md max-w-[95%]" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
                 </div>
             </div>
         </div> 
@@ -136,7 +136,7 @@ const INFOPRODUTOMOBILE = `
 </div>`;
 const INFOPRODUTOPC = `
 <div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex flex-col items-center" id="descricaoItem">
-    <div class="flex justify-center items-center">
+    <div class="flex justify-center items-center min-h-[400px]">
         <div onclick="voltar()" id="voltar" class="opacity-0">
             ${SVGMENOR}
         </div>
@@ -144,7 +144,7 @@ const INFOPRODUTOPC = `
             <div class="p-4 px-5">
                 <div class="flex">
                     <div class="flex justify-center items-center duration-200" id="imgPrincipal">
-                        <img class="rounded-md max-w-[70%]" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
+                        <img class="rounded-md max-w-[95%]" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
                     </div>
                 </div>
             </div>
@@ -199,12 +199,3 @@ const SUBIMAGEMMOBILEANTESDEPOIS = `
     <img class="p-[2px] rounded-md"  style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
     <img class="p-[2px] rounded-md" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEMDEPENDENTE_" alt="product image"/>
 </div>`;
-
-`
-<div id="imgSort" class="pt-4 flex justify-center overflow-y-auto">
-    <div class="h-[90px] flex" id="subImgens">
-        _SUBIMAGENS_
-    </div>
-</div>
-
-`

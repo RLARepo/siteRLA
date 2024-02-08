@@ -50,7 +50,7 @@ function definirLargura(){
     }else{
         $('#descricaoItem').removeClass("flex-wrap justify-center");
     }
-    if(window.innerWidth < 430){
+    if(window.innerWidth < 450){
         $('#cardImgSubImg').removeClass("w-[20%] min-w-[300px]");
     }else{
         $('#cardImgSubImg').addClass("w-[20%] min-w-[300px]");
@@ -59,19 +59,19 @@ function definirLargura(){
 
 function mudaLayoutAntesDepois(){
     if(window.innerWidth < 760 && window.innerWidth > 530){
-        $('#avancar').removeClass('ml-[90px]');
-        $('#voltar').removeClass('mr-[90px]');
+        $('#avancar').removeClass('ml-[150px]');
+        $('#voltar').removeClass('mr-[150px]');
         $('#voltar').addClass('ml-[8px]');
         $('#avancar').addClass('mr-[8px]');
     }else if(window.innerWidth > 760){
-        $('#avancar').addClass('ml-[90px]');
-        $('#voltar').addClass('mr-[90px]');
+        $('#avancar').addClass('ml-[150px]');
+        $('#voltar').addClass('mr-[150px]');
         $('#voltar').removeClass('ml-[8px]');
         $('#avancar').removeClass('mr-[8px]');
     }
     if (window.innerWidth < 760){
-        $('#avancar').removeClass('ml-[90px]');
-        $('#voltar').removeClass('mr-[90px]');
+        $('#avancar').removeClass('ml-[150px]');
+        $('#voltar').removeClass('mr-[150px]');
         $('#voltar').addClass('ml-[8px]');
         $('#avancar').addClass('mr-[8px]');
         $('#imgPrincipal > img').removeClass("mr-[12px]");
@@ -263,20 +263,20 @@ function selecionado(id, novaImagem, novaImagemDependente){
         itens[i].style.border = '';
     }
     if(novaImagemDependente){
-        $('#voltar').addClass('mr-[90px]');
-        $('#avancar').addClass('ml-[90px]');
+        $('#voltar').addClass('mr-[150px]');
+        $('#avancar').addClass('ml-[150px]');
     }else{
-        $('#voltar').removeClass('mr-[90px]');
-        $('#avancar').removeClass('ml-[90px]');
+        $('#voltar').removeClass('mr-[150px]');
+        $('#avancar').removeClass('ml-[150px]');
     }
     const item = novaImagemDependente ? `
-        <img class="rounded-md max-w-[70%] mr-[12px]" id="" src="${DIRETORIO}/views/static/uploads/${novaImagem}" alt="product image"/>
+        <img class="rounded-md max-w-[95%] mr-[12px]" id="" src="${DIRETORIO}/views/static/uploads/${novaImagem}" alt="product image"/>
         ${SVGFLECHA}
-        <img class="rounded-md max-w-[70%] ml-[12px]" id="" src="${DIRETORIO}/views/static/uploads/${novaImagemDependente}" alt="product image"/>
+        <img class="rounded-md max-w-[95%] ml-[12px]" id="" src="${DIRETORIO}/views/static/uploads/${novaImagemDependente}" alt="product image"/>
     ` 
     :
     `
-        <img class="rounded-md max-w-[70%]" id="" src="${DIRETORIO}/views/static/uploads/${novaImagem}" alt="product image"/>
+        <img class="rounded-md max-w-[95%]" id="" src="${DIRETORIO}/views/static/uploads/${novaImagem}" alt="product image"/>
     ` 
     ;
     $('#imgPrincipal').html(item);
