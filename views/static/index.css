@@ -19,9 +19,6 @@ body{
 .itens:active{
     transform: scale(0.93);
 }
-.svgMaior, .svgMenor{
-    cursor: pointer;
-}
 .svgMaior:active, .svgMenor:active{
     fill: green
 }

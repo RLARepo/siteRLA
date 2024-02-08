@@ -111,7 +111,7 @@ const INFO = `
 const INFOPRODUTOMOBILE = `
 <div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex flex-col items-center" id="descricaoItem">
     <div class="flex justify-center items-center min-h-[400px]"> 
-        <div onclick="voltar()" id="voltar" class="opacity-0">
+        <div onclick="voltar()" id="voltar">
             ${SVGMENOR}
         </div>       
         <div class="pt-4 flex justify-center w-[20%] min-w-[150px]" id="cardImgSubImg">
@@ -137,7 +137,7 @@ const INFOPRODUTOMOBILE = `
 const INFOPRODUTOPC = `
 <div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex flex-col items-center" id="descricaoItem">
     <div class="flex justify-center items-center min-h-[400px]">
-        <div onclick="voltar()" id="voltar" class="opacity-0">
+        <div onclick="voltar()" id="voltar">
             ${SVGMENOR}
         </div>
         <div class="pt-4 justify-center flex w-[21%] min-w-[150px]" id="cardImgSubImg">
@@ -183,19 +183,4 @@ const ITEMEDIT = `
             <h5 class="text-xl font-semibold mr-[15px] tracking-tight text-white">_DESCRICAO_</h5><button onclick="deletar(_ID_)">${SVGLIXO}</button>
         </a>
     </div>
-</div>`;
-const SUBIMAGEMPC = `
-<img class="p-[2px] rounded-md" onmouseenter="selecionado(_ID_, '_LINKIMAGEM_')" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>`;
-const SUBIMAGEMPCANTESDEPOIS = `
-<div class="flex min-w-[105px]" onmouseenter="selecionado(_ID_, '_LINKIMAGEM_', '_LINKIMAGEMDEPENDENTE_')">
-    <img class="p-[2px] rounded-md" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
-    <img class="p-[2px] rounded-md" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEMDEPENDENTE_" alt="product image"/>
-</div>`;
-
-const SUBIMAGEMMOBILE = `
-<img class="p-[2px] rounded-md" onclick="selecionado(_ID_, '_LINKIMAGEM_')" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>`;
-const SUBIMAGEMMOBILEANTESDEPOIS = `
-<div class="flex min-w-[105px]" onclick="selecionado(_ID_, '_LINKIMAGEM_',  '_LINKIMAGEMDEPENDENTE_')">
-    <img class="p-[2px] rounded-md"  style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
-    <img class="p-[2px] rounded-md" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEMDEPENDENTE_" alt="product image"/>
 </div>`;

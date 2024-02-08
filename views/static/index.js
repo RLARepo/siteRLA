@@ -1,6 +1,6 @@
 let id_atual = 0;
-let ja_AlterouPC = false;
-let ja_AlterouMobile = false;
+let ja_AlterouPC = true;
+let ja_AlterouMobile = true;
 let fotoSelecionada = {mudou : false, id : 0};
 const itensRenderizados = {};
 let fotosRenderizadas = [];
@@ -34,6 +34,10 @@ window.addEventListener('resize', function () {
 
 $('#produtosNavSelect, #produtosNav').on('click', async() => {
     window.location.href = '/listar_itens';
+});
+
+$('#mainMenu').on('click', async() => {
+    window.location.href = '/';
 });
 
 $('#contatoNavSelect, #contatoNav').on('click', async() => {
@@ -91,6 +95,16 @@ function mudaLayoutAntesDepois(){
 }
 
 function mudaLayout(){
+    const id_inicial = fotoSelecionada.id;
+    $('#voltar, #avancar').addClass('cursor-pointer');
+    if(id_inicial > fotosRenderizadas.length - 2){
+        $('#avancar').addClass('opacity-0 cursor-default');
+        $('#avancar').removeClass('cursor-pointer');
+    }
+    if(id_inicial < 1){
+        $('#voltar').addClass('opacity-0 cursor-default');
+        $('#voltar').removeClass('cursor-pointer');
+    }
     if (window.innerWidth < 750 && !ja_AlterouMobile){
         $('#conteudo-html').html(`
         <div class="listagem justify-center font-mono text-white text-sm text-center font-bold leading-6 bg-stripes-purple rounded-lg">
@@ -115,7 +129,6 @@ function mudaLayout(){
         ja_AlterouMobile = false;
         if(fotoSelecionada.mudou) selecionado(fotoSelecionada.id, fotoSelecionada.novaImagem, fotoSelecionada.novaImagemDependente);
     }
-    
 }
 
 function escolheLayout(layoutMobile, layoutPc){
@@ -174,6 +187,8 @@ async function listarItens(){
 };
 
 async function listarItem(id){
+    ja_AlterouPC = false;
+    ja_AlterouMobile = false;
     id_atual = id;
     $('#conteudo-html').html('');
     const {arquivo} = await $.ajax({
@@ -186,26 +201,10 @@ async function listarItem(id){
         dataType: 'json',
         method: 'GET'
     });
-    const baseAntesDepoisPC = (tipo) => {
-        return tipo == 'NM' ? SUBIMAGEMPC : SUBIMAGEMPCANTESDEPOIS;
-    }
-    const baseAntesDepoisMOBILE = (tipo) => {
-        return tipo == 'NM' ? SUBIMAGEMMOBILE : SUBIMAGEMMOBILEANTESDEPOIS;
-    }
     const linkReferencia = (item) => {
         return item.tipo == 'NM' ? '' : item.referencia;
     }
     fotosRenderizadas = [];
-    var subImagensPc = baseAntesDepoisPC(arquivo.tipo)
-    .replaceAll('_LINKIMAGEM_', arquivo.caminho)
-    .replaceAll('_LINKIMAGEMDEPENDENTE_', linkReferencia(arquivo))
-    .replace('_SELECIONADO_', 'border: solid 1px green;')
-    .replace('_ID_', 0);
-    var subImagensMobile = baseAntesDepoisMOBILE(arquivo.tipo)
-    .replaceAll('_LINKIMAGEM_', arquivo.caminho)
-    .replaceAll('_LINKIMAGEMDEPENDENTE_', linkReferencia(arquivo))
-    .replace('_SELECIONADO_', 'border: solid 1px green;')
-    .replace('_ID_', 0);
     fotosRenderizadas.push({
         id : 0, 
         novaImagem : arquivo.caminho, 
@@ -213,14 +212,6 @@ async function listarItem(id){
     })
     var i = 1;
     for(const item of subArquivos){
-        subImagensMobile += baseAntesDepoisMOBILE(item.tipo)
-        .replaceAll('_LINKIMAGEM_', item.caminho)
-        .replaceAll('_LINKIMAGEMDEPENDENTE_', linkReferencia(item))
-        .replace('_ID_', i);
-        subImagensPc += baseAntesDepoisPC(item.tipo)
-        .replaceAll('_LINKIMAGEM_', item.caminho)
-        .replaceAll('_LINKIMAGEMDEPENDENTE_', linkReferencia(item))
-        .replace('_ID_', i);
         fotosRenderizadas.push({
             id : i, 
             novaImagem : item.caminho, 
@@ -232,12 +223,10 @@ async function listarItem(id){
     .replace('_NOME_', arquivo.nome)
     .replace('_DESCRICAO_',  arquivo.descricao)
     .replace('_LINKIMAGEM_', arquivo.caminho)
-    .replace('_SUBIMAGENS_', subImagensMobile);
     itensRenderizados.INFOPRODUTOPC = INFOPRODUTOPC
     .replace('_NOME_', arquivo.nome)
     .replace('_DESCRICAO_',  arquivo.descricao)
     .replace('_LINKIMAGEM_', arquivo.caminho)
-    .replace('_SUBIMAGENS_', subImagensPc)
     $('#conteudo-html').html(`
     <div class="listagem justify-center font-mono text-white text-sm text-center font-bold leading-6 bg-stripes-purple rounded-lg">
         ${
@@ -246,9 +235,17 @@ async function listarItem(id){
     </div>
     `);
     definirLargura();
-    const id_inicial = fotoSelecionada.id + 1;
-    if(id_inicial > fotosRenderizadas.length - 2) $('#avancar').addClass('opacity-0');
-    if(id_inicial < 1) $('#voltar').addClass('opacity-0');
+    selecionado(0, arquivo.caminho, linkReferencia(arquivo));
+    const id_inicial = fotoSelecionada.id;
+    $('#voltar, #avancar').addClass('cursor-pointer');
+    if(id_inicial > fotosRenderizadas.length - 2){
+        $('#avancar').addClass('opacity-0 cursor-default');
+        $('#avancar').removeClass('cursor-pointer');
+    }
+    if(id_inicial < 1){
+        $('#voltar').addClass('opacity-0 cursor-default');
+        $('#voltar').removeClass('cursor-pointer');
+    }
 };
 
 function selecionado(id, novaImagem, novaImagemDependente){
@@ -290,9 +287,16 @@ function voltar(){
         return;
     }
     const id = fotoSelecionada.id - 1;
-    if(id < 0) return;
-    if(id < 1) $('#voltar').addClass('opacity-0');
-    $('#avancar').removeClass('opacity-0');
+    $('#voltar').addClass('cursor-pointer');
+    if(id < 0){
+        $('#voltar').removeClass('cursor-pointer');
+        return $('#voltar').addClass('opacity-0 cursor-default');
+    } 
+    if(id < 1){
+        $('#voltar').removeClass('cursor-pointer');
+        $('#voltar').addClass('opacity-0 cursor-default');
+    } 
+    $('#avancar').removeClass('opacity-0 cursor-default');
     $('#imgPrincipal').addClass('opacity-0 translate-x-[-11rem]');
     setTimeout(() => {
         $('#imgPrincipal').removeClass('translate-x-[-11rem]');
@@ -306,9 +310,16 @@ function voltar(){
 
 function avancar(){
     const id = fotoSelecionada.id + 1;
-    if(id > fotosRenderizadas.length - 1) return;
-    if(id > fotosRenderizadas.length - 2) $('#avancar').addClass('opacity-0');
-    $('#voltar').removeClass('opacity-0');
+    $('#avancar').addClass('cursor-pointer');
+    if(id > fotosRenderizadas.length - 1){
+        $('#avancar').removeClass('cursor-pointer');
+        return $('#avancar').addClass('opacity-0 cursor-default'); 
+    } 
+    if(id > fotosRenderizadas.length - 2){
+        $('#avancar').addClass('opacity-0 cursor-default');
+        $('#avancar').removeClass('cursor-pointer');
+    } 
+    $('#voltar').removeClass('opacity-0 cursor-default');
     $('#imgPrincipal').addClass('opacity-0 translate-x-44');
     setTimeout(() => {
         $('#imgPrincipal').removeClass('translate-x-44');
