@@ -7,7 +7,7 @@ const SVGCALL = `
     <path fill-rule="evenodd" clip-rule="evenodd" d="M17.3545 22.2323C15.3344 21.7262 11.1989 20.2993 7.44976 16.5502C3.70065 12.8011 2.2738 8.66559 1.76767 6.6455C1.47681 5.48459 2.00058 4.36434 2.88869 3.72997L5.21694 2.06693C6.57922 1.09388 8.47432 1.42407 9.42724 2.80051L10.893 4.91776C11.5152 5.8165 11.3006 7.0483 10.4111 7.68365L9.24234 8.51849C9.41923 9.1951 9.96939 10.5846 11.6924 12.3076C13.4154 14.0306 14.8049 14.5807 15.4815 14.7576L16.3163 13.5888C16.9517 12.6994 18.1835 12.4847 19.0822 13.1069L21.1995 14.5727C22.5759 15.5257 22.9061 17.4207 21.933 18.783L20.27 21.1113C19.6356 21.9994 18.5154 22.5232 17.3545 22.2323ZM8.86397 15.136C12.2734 18.5454 16.0358 19.8401 17.8405 20.2923C18.1043 20.3583 18.4232 20.2558 18.6425 19.9488L20.3056 17.6205C20.6299 17.1665 20.5199 16.5348 20.061 16.2171L17.9438 14.7513L17.0479 16.0056C16.6818 16.5182 16.0047 16.9202 15.2163 16.7501C14.2323 16.5378 12.4133 15.8569 10.2782 13.7218C8.1431 11.5867 7.46219 9.7677 7.24987 8.7837C7.07977 7.9953 7.48181 7.31821 7.99439 6.95208L9.24864 6.05618L7.78285 3.93893C7.46521 3.48011 6.83351 3.37005 6.37942 3.6944L4.05117 5.35744C3.74413 5.57675 3.64162 5.89565 3.70771 6.15943C4.15989 7.96418 5.45459 11.7266 8.86397 15.136Z"/>
 </svg>`;
 const SVGFLECHA = `
-<svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" id="flechaSvg" class="bg-white border rounded-3xl min-w-[32px]" width="30px" height="30px" viewBox="0 0 24 24" fill="#ffffff">
     <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
 const SVGCLOCK = `
@@ -23,6 +23,24 @@ const SVGLOCAL = `
         <path d="M148.5,59.183c-28.273,0-51.274,23.154-51.274,51.614c0,28.461,23.001,51.614,51.274,51.614   c28.273,0,51.274-23.153,51.274-51.614C199.774,82.337,176.773,59.183,148.5,59.183z M148.5,141.901   c-16.964,0-30.765-13.953-30.765-31.104c0-17.15,13.801-31.104,30.765-31.104c16.964,0,30.765,13.953,30.765,31.104   C179.265,127.948,165.464,141.901,148.5,141.901z"/>
     </g>
 </svg>`;
+const SVGMAIOR = `
+<svg xmlns="http://www.w3.org/2000/svg" class="svgMaior" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#e5e7eb" version="1.1" id="Capa_1" width="30px" height="30px" viewBox="0 0 103.536 103.536" xml:space="preserve">
+<g>
+	<g>
+		<path d="M0.65,91.928c1.221,2.701,3.881,4.3,6.665,4.3c1.006,0,2.029-0.209,3.006-0.65l88.917-40.195    c2.688-1.216,4.381-3.925,4.295-6.873c-0.085-2.948-1.934-5.554-4.687-6.609L9.929,7.794C6.17,6.352,1.933,8.23,0.489,12.001    c-1.447,3.769,0.438,7.995,4.207,9.44l72.569,27.834L4.299,82.255C0.62,83.92-1.012,88.249,0.65,91.928z"/>
+	</g>
+</g>
+</svg>
+`;
+const SVGMENOR = `
+<svg xmlns="http://www.w3.org/2000/svg" class="svgMenor" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#e5e7eb" version="1.1" id="Capa_1" width="30px" height="30px" viewBox="0 0 103.537 103.537" xml:space="preserve">
+<g>
+	<g>
+		<path d="M103.048,12.002c-1.445-3.771-5.679-5.649-9.438-4.207L4.692,41.9c-2.753,1.055-4.603,3.662-4.688,6.609    c-0.087,2.948,1.608,5.656,4.295,6.872l88.917,40.196c0.978,0.44,2,0.65,3.006,0.65c2.784,0,5.442-1.6,6.665-4.302    c1.661-3.678,0.029-8.007-3.648-9.671L26.273,49.277l72.568-27.834C102.61,19.998,104.496,15.771,103.048,12.002z"/>
+	</g>
+</g>
+</svg>
+`;
 const SVGLIXO = `<svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#f3000f" version="1.1" id="Layer_1" viewBox="0 0 492.308 492.308" xml:space="preserve">
 <g>
 	<g>
@@ -91,17 +109,20 @@ const INFO = `
     </div>
 </div>`;
 const INFOPRODUTOMOBILE = `
-<div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex" id="descricaoItem">
-    <div class="pt-4 flex w-[20%] min-w-[300px]" id="cardImgSubImg">
-        <div class="p-4 px-5">
-            <div class="flex justify-center">
-                <img class="rounded-md" id="imgPrincipal" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
-            </div>
-            <div id="imgSort" class="pt-4 flex justify-center overflow-y-auto">
-                <div class="h-[90px] flex" id="subImgens">
-                    _SUBIMAGENS_
+<div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex flex-col items-center" id="descricaoItem">
+    <div class="flex justify-center items-center min-w-[360px]"> 
+        <div onclick="voltar()" id="voltar" class="opacity-0">
+            ${SVGMENOR}
+        </div>       
+        <div class="pt-4 flex justify-center w-[20%] min-w-[300px]" id="cardImgSubImg">
+            <div class="p-4 px-5">
+                <div class="flex justify-center items-center duration-200" id="imgPrincipal">
+                    <img class="rounded-md max-w-[70%]" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
                 </div>
             </div>
+        </div> 
+        <div onclick="avancar()" id="avancar">
+            ${SVGMAIOR}  
         </div>
     </div>
     <div class="pt-8 pb-5 w-[80%]" id="nomeDescricao">
@@ -114,21 +135,24 @@ const INFOPRODUTOMOBILE = `
     </div>
 </div>`;
 const INFOPRODUTOPC = `
-<div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex" id="descricaoItem">
-    <div class="pt-4 flex w-[21%] min-w-[300px]" id="cardImgSubImg">
-        <div class="p-4 px-5">
-            <div class="flex justify-center">
-                <img class="rounded-md" id="imgPrincipal" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
+<div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex flex-col items-center" id="descricaoItem">
+    <div class="flex justify-center items-center min-w-[360px]">
+        <div onclick="voltar()" id="voltar" class="opacity-0">
+            ${SVGMENOR}
+        </div>
+        <div class="pt-4 justify-center flex w-[21%] min-w-[300px]" id="cardImgSubImg">
+            <div class="p-4 px-5">
+                <div class="flex">
+                    <div class="flex justify-center items-center duration-200" id="imgPrincipal">
+                        <img class="rounded-md max-w-[70%]" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="pt-8 w-[9%]" id="cardImgSubImg">
-        <div id="imgSort" class=" flex justify-center overflow-y-auto">
-            <div class="h-[230px]" id="subImgens">
-                _SUBIMAGENS_
-            </div>
+        <div onclick="avancar()" id="avancar">
+            ${SVGMAIOR}  
         </div>
-    </div>
+    </div> 
     <div class="pt-8 pb-5 w-[70%]" id="nomeDescricao">
         <a class="break-all">
             <h5 class="text-xl font-semibold tracking-tight text-white  mb-[12px]">Nome : _NOME_</h5>
@@ -160,5 +184,27 @@ const ITEMEDIT = `
         </a>
     </div>
 </div>`;
-const SUBIMAGEMPC = `<img class="p-[2px] rounded-md" onmouseenter="selecionado(_ID_, '_LINKIMAGEM_')" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>`
-const SUBIMAGEMMOBILE = `<img class="p-[2px] rounded-md" onclick="selecionado(_ID_, '_LINKIMAGEM_')" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>`
+const SUBIMAGEMPC = `
+<img class="p-[2px] rounded-md" onmouseenter="selecionado(_ID_, '_LINKIMAGEM_')" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>`;
+const SUBIMAGEMPCANTESDEPOIS = `
+<div class="flex min-w-[105px]" onmouseenter="selecionado(_ID_, '_LINKIMAGEM_', '_LINKIMAGEMDEPENDENTE_')">
+    <img class="p-[2px] rounded-md" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
+    <img class="p-[2px] rounded-md" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEMDEPENDENTE_" alt="product image"/>
+</div>`;
+
+const SUBIMAGEMMOBILE = `
+<img class="p-[2px] rounded-md" onclick="selecionado(_ID_, '_LINKIMAGEM_')" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>`;
+const SUBIMAGEMMOBILEANTESDEPOIS = `
+<div class="flex min-w-[105px]" onclick="selecionado(_ID_, '_LINKIMAGEM_',  '_LINKIMAGEMDEPENDENTE_')">
+    <img class="p-[2px] rounded-md"  style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
+    <img class="p-[2px] rounded-md" style="_SELECIONADO_" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEMDEPENDENTE_" alt="product image"/>
+</div>`;
+
+`
+<div id="imgSort" class="pt-4 flex justify-center overflow-y-auto">
+    <div class="h-[90px] flex" id="subImgens">
+        _SUBIMAGENS_
+    </div>
+</div>
+
+`

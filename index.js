@@ -25,10 +25,6 @@ const storage = multer.diskStorage({
       const fileName = Date.now() + path.extname(file.originalname);
       const id_produto = req.body.idProduto == 'null' ? 1 : parseInt(req.body.idProduto) + 1;
       const listaItens = req.body.antesDepois.split(',');
-      tipo = listaItens.includes(`${i}`) ? 'AT' : 'NM';
-      subTipo = listaItens.includes(`${i - 1}`) ? 'AT' : 'NM';
-      console.log(listaItens, subTipo, i)
-      
       if(i == 0){
         openDb.run(
           'INSERT INTO produto(id, nome, descricao, caminho, tipo, referencia) VALUES (?, ?, ?, ?, ?, ?);',
@@ -36,7 +32,7 @@ const storage = multer.diskStorage({
           req.body.nome,
           req.body.descricao,
           fileName,
-          tipo,
+          'NM',
           ''
         );
       }else{
@@ -46,14 +42,16 @@ const storage = multer.diskStorage({
           openDb.get('SELECT MAX(id) AS id FROM subImagem WHERE id_produto = ?;', id_produto, (err, row) => {
             if(subItem == 1){
               openDb.run(
-                'UPDATE produto SET referencia = ? WHERE id = ?;',
+                'UPDATE produto SET referencia = ?, tipo = ? WHERE id = ?;',
                 fileName,
+                'AT',
                 id_produto
               );
             }else{
               openDb.run(
-                'UPDATE subImagem SET referencia = ? WHERE id = ?;',
+                'UPDATE subImagem SET referencia = ?, tipo = ? WHERE id = ?;',
                 fileName,
+                'AT',
                 row.id
               );
             }
@@ -63,7 +61,7 @@ const storage = multer.diskStorage({
             'INSERT INTO subImagem(id_produto, caminho, tipo, referencia) VALUES (?, ?, ?, ?);',
             id_produto,
             fileName,
-            subTipo,
+            'NM',
             ''
           );
         }
