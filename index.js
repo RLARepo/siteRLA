@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
       cb(null, 'views/static/uploads/');
   },
   filename: async function(req, file, cb){
-      const fileName = Date.now() + path.extname(file.originalname);
+      const fileName = i + Date.now() + path.extname(file.originalname);
       const id_produto = req.body.idProduto == 'null' ? 1 : parseInt(req.body.idProduto) + 1;
       const listaItens = req.body.antesDepois.split(',');
       if(i == 0){
