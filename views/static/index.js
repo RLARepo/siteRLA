@@ -307,8 +307,10 @@ function voltar(){
     if(id < 1){
         $('#voltar').removeClass('cursor-pointer');
         $('#voltar').addClass('opacity-0 cursor-default');
-    } 
+    }
+    console.log(id)
     $('#avancar').removeClass('opacity-0 cursor-default');
+    $('#avancar').addClass('cursor-pointer');
     $('#imgPrincipal').addClass('opacity-0 translate-x-[-11rem]');
     setTimeout(() => {
         $('#imgPrincipal').removeClass('translate-x-[-11rem]');
@@ -329,6 +331,7 @@ function avancar(){
         $('#avancar').removeClass('cursor-pointer');
     } 
     $('#voltar').removeClass('opacity-0 cursor-default');
+    $('#voltar').addClass('cursor-pointer');
     $('#imgPrincipal').addClass('opacity-0 translate-x-44');
     setTimeout(() => {
         $('#imgPrincipal').removeClass('translate-x-44');
@@ -354,3 +357,4 @@ function renderizar(evento, c){
         $('#imgPrincipal').removeClass('opacity-0 translate-x-44');
     }, 100)
 }
+

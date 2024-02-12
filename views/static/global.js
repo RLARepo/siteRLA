@@ -116,17 +116,17 @@ const INFOPRODUTOMOBILE = `
         </a>
     </div>    
     <div class="flex justify-center items-center min-h-[400px]"> 
-        <div onclick="voltar()" id="voltar">
+        <div onclick="voltar()" id="voltar" class="duration-300">
             ${SVGMENOR}
         </div>       
-        <div class="flex justify-center min-w-[150px]" id="cardImgSubImg">
+        <div class="flex justify-center min-w-[150px] w-[20%] min-w-[300px]" id="cardImgSubImg">
             <div class="p-2 px-5">
                 <div class="flex justify-center items-center duration-100" id="imgPrincipal">
                     <img class="rounded-md max-w-[95%]" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
                 </div>
             </div>
         </div> 
-        <div onclick="avancar()" id="avancar">
+        <div onclick="avancar()" id="avancar" class="duration-300">
             ${SVGMAIOR}
         </div>
     </div>
@@ -144,10 +144,10 @@ const INFOPRODUTOPC = `
         </a>
     </div>
     <div class="flex justify-center items-center min-h-[400px]">
-        <div onclick="voltar()" id="voltar">
+        <div onclick="voltar()" id="voltar" class="duration-300">
             ${SVGMENOR}
         </div>
-        <div class="justify-center flex min-w-[150px]" id="cardImgSubImg">
+        <div class="justify-center flex min-w-[150px] w-[20%] min-w-[300px]" id="cardImgSubImg">
             <div class="p-2 px-5">
                 <div class="flex">
                     <div class="flex justify-center items-center duration-100" id="imgPrincipal">
@@ -156,7 +156,7 @@ const INFOPRODUTOPC = `
                 </div>
             </div>
         </div>
-        <div onclick="avancar()" id="avancar">
+        <div onclick="avancar()" id="avancar" class="duration-300">
             ${SVGMAIOR}
         </div>
     </div> 
