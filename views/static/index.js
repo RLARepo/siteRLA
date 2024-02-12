@@ -160,7 +160,9 @@ function escolheLayout(layoutMobile, layoutPc){
 
 const sh = parseInt($('#mobile-menu').css('height').replace(/[a-z]+/g, '')) - 64;
 $('#mobile-menu').addClass('mt-[-' + sh + 'px]');
-$('#mobile-menu').removeClass('mt-16');
+setTimeout(() => {
+    $('#mobile-menu').removeClass('hidden');
+}, 160);
 
 function contatos(){
     $('#conteudo-html').html('');
