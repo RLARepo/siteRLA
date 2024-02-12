@@ -270,9 +270,9 @@ async function listarItem(id){
 
 function selecionado(id, novaImagem, novaImagemDependente, evento){
     const item = novaImagemDependente ? `
-        <img class="rounded-md max-w-[95%] mr-[12px] duration-100" id="imgAtual" onload="renderizar('${evento}')" src="${DIRETORIO}/views/static/uploads/${novaImagem}" alt="product image"/>
+        <img class="rounded-md max-w-[95%] mr-[12px] duration-100" id="imgAtual" onload="renderizar('${evento}', true)" src="${DIRETORIO}/views/static/uploads/${novaImagem}" alt="product image"/>
         ${SVGFLECHA}
-        <img class="rounded-md max-w-[95%] ml-[12px] duration-100" id="imgAtual2" src="${DIRETORIO}/views/static/uploads/${novaImagemDependente}" alt="product image"/>
+        <img class="rounded-md max-w-[95%] ml-[12px] duration-100" id="imgAtual2" onload="renderizar('${evento}', true)" src="${DIRETORIO}/views/static/uploads/${novaImagemDependente}" alt="product image"/>
     ` 
     :
     `
@@ -329,7 +329,6 @@ function avancar(){
         $('#avancar').removeClass('cursor-pointer');
     } 
     $('#voltar').removeClass('opacity-0 cursor-default');
-    $('#imgAtual, #imgAtual2').addClass('opacity-0 duration-200'); 
     $('#imgPrincipal').addClass('opacity-0 translate-x-44');
     setTimeout(() => {
         $('#imgPrincipal').removeClass('translate-x-44');
@@ -338,7 +337,13 @@ function avancar(){
     }, 100)
 }
 
-function renderizar(evento){
+var count = 0;
+function renderizar(evento, c){
+    if(c && count == 0){
+        count += 1;
+        return
+    }
+    count = 0;
     if(evento == 'avancar'){
         setTimeout(() => {
             $('#imgPrincipal').removeClass('opacity-0 translate-x-[-11rem]');
