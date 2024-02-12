@@ -1,5 +1,6 @@
 $( document ).ready( async() => {
     carregarItens();
+    $('#descricao').val('');
 });
 
 async function carregarItens(){
@@ -12,7 +13,7 @@ async function carregarItens(){
     for(var i = 0; i < arquivos.length; i++){
         ITENS += ITEMEDIT
         .replaceAll('_ID_', arquivos[i].id)
-        .replace('_DESCRICAO_',  arquivos[i].nome)
+        .replace('_DESCRICAO_', arquivos[i].nome)
         .replace('_LINKIMAGEM_', arquivos[i].caminho);
     }
     $('#conteudo-html').html('');
@@ -38,7 +39,7 @@ $('#salvar').on('click', async() => {
     });
     formData.append('idProduto', arquivo);
     formData.append('nome', $('#produto').val());
-    formData.append('descricao', $('#descricao').val());
+    formData.append('descricao', $('#descricao').val().replaceAll('\n', '-quebra_de_linha-'));
     formData.append('antesDepois', inputFilesAntesDepois);
     for(const file of inputFiles){
         formData.append('file[]', file);

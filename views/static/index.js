@@ -24,12 +24,14 @@ $(document).ready(() => {
             break;
     }
     definirLargura();
+    definiGridContatos();
 })
 
 window.addEventListener('resize', function () {
     definirLargura();
     mudaLayout();
     mudaLayoutAntesDepois();
+    definiGridContatos();
 });
 
 $('#produtosNavSelect, #produtosNav').on('click', async() => {
@@ -48,8 +50,24 @@ function carregarIten(id){
     window.location.href = '/listar_item_descricao?id='+id;
 }
 
+function definiGridContatos(){
+    if(window.innerWidth < 380){
+        $('#listagemContatos').removeClass("grid-cols-2");
+        $('#listagemContatos').addClass("grid-cols-1");
+        $('#principalListContatos').removeClass("min-w-[360px]");
+        $('#principalListContatos').addClass("min-w-[240px]");
+        $('iframe').css('width', '240px')
+    }else{
+        $('#listagemContatos').addClass("grid-cols-2");
+        $('#listagemContatos').removeClass("grid-cols-1");
+        $('#principalListContatos').addClass("min-w-[360px]");
+        $('#principalListContatos').removeClass("min-w-[240px]");
+        $('iframe').css('width', '350px')
+    }
+}
+
 function definirLargura(){
-    if (window.innerWidth < 600){
+    if(window.innerWidth < 600){
         $('#descricaoItem').addClass("flex-wrap justify-center");
     }else{
         $('#descricaoItem').removeClass("flex-wrap justify-center");
@@ -172,7 +190,7 @@ async function listarItens(){
     for(var i = 0; i < arquivos.length; i++){
         ITENS += ITEM
         .replace('_ID_', arquivos[i].id)
-        .replace('_DESCRICAO_',  arquivos[i].nome)
+        .replace('_DESCRICAO_', arquivos[i].nome)
         .replace('_LINKIMAGEM_', arquivos[i].caminho);
     }
     $('#conteudo-html').html('');
@@ -221,11 +239,11 @@ async function listarItem(id){
     }
     itensRenderizados.INFOPRODUTOMOBILE = INFOPRODUTOMOBILE
     .replace('_NOME_', arquivo.nome)
-    .replace('_DESCRICAO_',  arquivo.descricao)
+    .replace('_DESCRICAO_', arquivo.descricao.replaceAll('-quebra_de_linha-', '<br>'))
     .replace('_LINKIMAGEM_', arquivo.caminho)
     itensRenderizados.INFOPRODUTOPC = INFOPRODUTOPC
     .replace('_NOME_', arquivo.nome)
-    .replace('_DESCRICAO_',  arquivo.descricao)
+    .replace('_DESCRICAO_', arquivo.descricao.replaceAll('-quebra_de_linha-', '<br>'))
     .replace('_LINKIMAGEM_', arquivo.caminho)
     $('#conteudo-html').html(`
     <div class="listagem justify-center font-mono text-white text-sm text-center font-bold leading-6 bg-stripes-purple rounded-lg">
@@ -249,22 +267,14 @@ async function listarItem(id){
 };
 
 function selecionado(id, novaImagem, novaImagemDependente){
-    const itens = $('#subImgens > img, #subImgens > div');
-    for(var i = 0; i < itens.length; i++){
-        if(i == id){
-            itens[i].style.border = '1px solid green';
-            continue;
-        }
-        itens[i].style.border = '';
-    }
     const item = novaImagemDependente ? `
-        <img class="rounded-md max-w-[95%] mr-[12px]" id="" src="${DIRETORIO}/views/static/uploads/${novaImagem}" alt="product image"/>
+        <img class="rounded-md max-w-[95%] mr-[12px] duration-100" id="imgAtual" src="${DIRETORIO}/views/static/uploads/${novaImagem}" alt="product image"/>
         ${SVGFLECHA}
-        <img class="rounded-md max-w-[95%] ml-[12px]" id="" src="${DIRETORIO}/views/static/uploads/${novaImagemDependente}" alt="product image"/>
+        <img class="rounded-md max-w-[95%] ml-[12px] duration-100" id="imgAtual2" src="${DIRETORIO}/views/static/uploads/${novaImagemDependente}" alt="product image"/>
     ` 
     :
     `
-        <img class="rounded-md max-w-[95%]" id="" src="${DIRETORIO}/views/static/uploads/${novaImagem}" alt="product image"/>
+        <img class="rounded-md max-w-[95%] duration-100" id="imgAtual" src="${DIRETORIO}/views/static/uploads/${novaImagem}" alt="product image"/>
     ` 
     ;
     $('#imgPrincipal').html(item);
@@ -302,10 +312,11 @@ function voltar(){
         $('#imgPrincipal').removeClass('translate-x-[-11rem]');
         $('#imgPrincipal').addClass('translate-x-44');
         selecionado(id, fotosRenderizadas[id].novaImagem, fotosRenderizadas[id].novaImagemDependente);
-    }, 200)
+    }, 100)
     setTimeout(() => {
+        
         $('#imgPrincipal').removeClass('opacity-0 translate-x-44');
-    }, 500)
+    }, 300)
 }
 
 function avancar(){
@@ -320,13 +331,14 @@ function avancar(){
         $('#avancar').removeClass('cursor-pointer');
     } 
     $('#voltar').removeClass('opacity-0 cursor-default');
+    $('#imgAtual, #imgAtual2').addClass('opacity-0 duration-200'); 
     $('#imgPrincipal').addClass('opacity-0 translate-x-44');
     setTimeout(() => {
         $('#imgPrincipal').removeClass('translate-x-44');
         $('#imgPrincipal').addClass('translate-x-[-11rem]');
         selecionado(id, fotosRenderizadas[id].novaImagem, fotosRenderizadas[id].novaImagemDependente);
-    }, 200)
+    }, 100)
     setTimeout(() => {
         $('#imgPrincipal').removeClass('opacity-0 translate-x-[-11rem]');
-    }, 500)
+    }, 300)
 }

@@ -65,8 +65,8 @@ const SVGLIXO = `<svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30
 </svg>`;
 const INFO = `
 <div class="flex flex-wrap-reverse justify-center">
-    <div class="w-3/6 min-w-[360px] p-5">
-        <div class="grid grid-cols-2 gap-4">
+    <div class="w-3/6 min-w-[360px] p-5" id="principalListContatos">
+        <div class="grid grid-cols-2 gap-4" id="listagemContatos">
             <div class="card-fones p-4 h-[150px] border-transparent rounded">
                 <div class="flex text-white justify-center items-center">
                     ${SVGCALL}
@@ -103,62 +103,66 @@ const INFO = `
         </div>
     </div>
     <div class="flex w-3/6 min-w-[350px] p-5 justify-center">
-        <div class="card-local w-[350px] h-[300px]">
+        <div class="card-local w-[350px] h-[300px] flex justify-center">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26362.65629575788!2d-42.744307296480024!3d-10.824142162336916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x765921521a3a289%3A0xd0bc236aee3dda01!2sXique-Xique%2C%20BA%2C%2047400-000!5e0!3m2!1spt-BR!2sbr!4v1703708238405!5m2!1spt-BR!2sbr" width="350" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
 </div>`;
 const INFOPRODUTOMOBILE = `
 <div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex flex-col items-center" id="descricaoItem">
+    <div class="pt-8 w-[70%]" id="nome">
+        <a class="break-all">
+            <h5 class="text-xl uppercase font-semibold tracking-tight text-white mb-[12px]"><span class="definicaoNome">NOME</span> : _NOME_</h5>
+        </a>
+    </div>    
     <div class="flex justify-center items-center min-h-[400px]"> 
         <div onclick="voltar()" id="voltar">
             ${SVGMENOR}
         </div>       
-        <div class="pt-4 flex justify-center w-[20%] min-w-[150px]" id="cardImgSubImg">
-            <div class="p-4 px-5">
-                <div class="flex justify-center items-center duration-200" id="imgPrincipal">
+        <div class="flex justify-center w-[20%] min-w-[150px]" id="cardImgSubImg">
+            <div class="p-2 px-5">
+                <div class="flex justify-center items-center duration-100" id="imgPrincipal">
                     <img class="rounded-md max-w-[95%]" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
                 </div>
             </div>
         </div> 
         <div onclick="avancar()" id="avancar">
-            ${SVGMAIOR}  
+            ${SVGMAIOR}
         </div>
     </div>
-    <div class="pt-8 pb-5 w-[80%]" id="nomeDescricao">
+    <div class="pt-8 pb-5 w-[90%]" id="descricao">
         <a class="break-all">
-            <h5 class="text-xl font-semibold tracking-tight text-white  mb-[12px]">Nome : _NOME_</h5>
-        </a>
-        <a class="break-all">
-            <h5 class="text-xl font-semibold tracking-tight text-white">Descrição : _DESCRICAO_</h5>
+            <h5 class="text-x font-semibold tracking-tight text-white text-justify	"><span class="definicaoDescricao text-xl">DESCRIÇÃO</span> : _DESCRICAO_</h5>
         </a>
     </div>
 </div>`;
 const INFOPRODUTOPC = `
 <div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex flex-col items-center" id="descricaoItem">
+    <div class="pt-8 w-[70%]" id="nome">
+        <a class="break-all">
+            <h5 class="text-xl uppercase font-semibold tracking-tight text-white mb-[12px]"><span class="definicaoNome">NOME</span> : _NOME_</h5>
+        </a>
+    </div>
     <div class="flex justify-center items-center min-h-[400px]">
         <div onclick="voltar()" id="voltar">
             ${SVGMENOR}
         </div>
-        <div class="pt-4 justify-center flex w-[21%] min-w-[150px]" id="cardImgSubImg">
-            <div class="p-4 px-5">
+        <div class="justify-center flex w-[21%] min-w-[150px]" id="cardImgSubImg">
+            <div class="p-2 px-5">
                 <div class="flex">
-                    <div class="flex justify-center items-center duration-200" id="imgPrincipal">
-                        <img class="rounded-md max-w-[95%]" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
+                    <div class="flex justify-center items-center duration-100" id="imgPrincipal">
+                        <img class="rounded-md max-w-[95%]" id="imgAtual" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
                     </div>
                 </div>
             </div>
         </div>
         <div onclick="avancar()" id="avancar">
-            ${SVGMAIOR}  
+            ${SVGMAIOR}
         </div>
     </div> 
-    <div class="pt-8 pb-5 w-[70%]" id="nomeDescricao">
+    <div class="pt-8 pb-5 w-[90%]" id="descricao">
         <a class="break-all">
-            <h5 class="text-xl font-semibold tracking-tight text-white  mb-[12px]">Nome : _NOME_</h5>
-        </a>
-        <a class="break-all">
-            <h5 class="text-xl font-semibold tracking-tight text-white">Descrição : _DESCRICAO_</h5>
+            <h5 class="text-xl font-semibold tracking-tight text-white text-justify"><span class="definicaoDescricao text-xl">DESCRIÇÃO</span> : _DESCRICAO_</h5>
         </a>
     </div>
 </div>`;
@@ -184,3 +188,5 @@ const ITEMEDIT = `
         </a>
     </div>
 </div>`;
+
+'border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 ';

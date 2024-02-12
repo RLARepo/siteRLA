@@ -23,13 +23,13 @@ body{
     fill: green
 }
 ::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
+    width: 12px;
 }
 ::-webkit-scrollbar-track {
-    background: #374151;    /* color of the tracking area */
+    background: #374151;
 }
 ::-webkit-scrollbar-thumb {
-    background-color: #171b20;    /* color of the scroll thumb */
+    background-color: #171b20;
     border-radius: 3px;
 }
 * {
@@ -37,5 +37,10 @@ body{
     scrollbar-color: blue orange;
   }
 .card-fones, .card-adress, .card-work{
-    background-color: #895831;
+    background-image: linear-gradient(145deg, rgba(237,218,175,1) 0%, rgba(187,148,120,0.9660860655737705) 13%, rgba(133,85,62,1) 38%, rgba(105,62,32,1) 54%);
+}
+.definicaoDescricao, .definicaoNome{
+    background-image: linear-gradient(45deg, #EDDAAF, #693E20);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
