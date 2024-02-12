@@ -119,7 +119,7 @@ const INFOPRODUTOMOBILE = `
         <div onclick="voltar()" id="voltar">
             ${SVGMENOR}
         </div>       
-        <div class="flex justify-center w-[20%] min-w-[150px]" id="cardImgSubImg">
+        <div class="flex justify-center min-w-[150px]" id="cardImgSubImg">
             <div class="p-2 px-5">
                 <div class="flex justify-center items-center duration-100" id="imgPrincipal">
                     <img class="rounded-md max-w-[95%]" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image"/>
@@ -147,7 +147,7 @@ const INFOPRODUTOPC = `
         <div onclick="voltar()" id="voltar">
             ${SVGMENOR}
         </div>
-        <div class="justify-center flex w-[21%] min-w-[150px]" id="cardImgSubImg">
+        <div class="justify-center flex min-w-[150px]" id="cardImgSubImg">
             <div class="p-2 px-5">
                 <div class="flex">
                     <div class="flex justify-center items-center duration-100" id="imgPrincipal">
