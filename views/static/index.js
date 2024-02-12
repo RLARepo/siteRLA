@@ -268,15 +268,15 @@ async function listarItem(id){
     }
 };
 
-function selecionado(id, novaImagem, novaImagemDependente){
+function selecionado(id, novaImagem, novaImagemDependente, evento){
     const item = novaImagemDependente ? `
-        <img class="rounded-md max-w-[95%] mr-[12px] duration-100" id="imgAtual" src="${DIRETORIO}/views/static/uploads/${novaImagem}" alt="product image"/>
+        <img class="rounded-md max-w-[95%] mr-[12px] duration-100" id="imgAtual" onload="renderizar('${evento}')" src="${DIRETORIO}/views/static/uploads/${novaImagem}" alt="product image"/>
         ${SVGFLECHA}
         <img class="rounded-md max-w-[95%] ml-[12px] duration-100" id="imgAtual2" src="${DIRETORIO}/views/static/uploads/${novaImagemDependente}" alt="product image"/>
     ` 
     :
     `
-        <img class="rounded-md max-w-[95%] duration-100" id="imgAtual" src="${DIRETORIO}/views/static/uploads/${novaImagem}" alt="product image"/>
+        <img class="rounded-md max-w-[95%] duration-100" id="imgAtual" onload="renderizar('${evento}')" src="${DIRETORIO}/views/static/uploads/${novaImagem}" alt="product image"/>
     ` 
     ;
     $('#imgPrincipal').html(item);
@@ -313,12 +313,8 @@ function voltar(){
     setTimeout(() => {
         $('#imgPrincipal').removeClass('translate-x-[-11rem]');
         $('#imgPrincipal').addClass('translate-x-44');
-        selecionado(id, fotosRenderizadas[id].novaImagem, fotosRenderizadas[id].novaImagemDependente);
+        selecionado(id, fotosRenderizadas[id].novaImagem, fotosRenderizadas[id].novaImagemDependente, 'voltar');
     }, 100)
-    setTimeout(() => {
-        
-        $('#imgPrincipal').removeClass('opacity-0 translate-x-44');
-    }, 300)
 }
 
 function avancar(){
@@ -338,9 +334,18 @@ function avancar(){
     setTimeout(() => {
         $('#imgPrincipal').removeClass('translate-x-44');
         $('#imgPrincipal').addClass('translate-x-[-11rem]');
-        selecionado(id, fotosRenderizadas[id].novaImagem, fotosRenderizadas[id].novaImagemDependente);
+        selecionado(id, fotosRenderizadas[id].novaImagem, fotosRenderizadas[id].novaImagemDependente, 'avancar');
     }, 100)
+}
+
+function renderizar(evento){
+    if(evento == 'avancar'){
+        setTimeout(() => {
+            $('#imgPrincipal').removeClass('opacity-0 translate-x-[-11rem]');
+        }, 100)
+        return;
+    }
     setTimeout(() => {
-        $('#imgPrincipal').removeClass('opacity-0 translate-x-[-11rem]');
-    }, 300)
+        $('#imgPrincipal').removeClass('opacity-0 translate-x-44');
+    }, 100)
 }
