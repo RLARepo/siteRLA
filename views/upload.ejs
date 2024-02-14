@@ -4,57 +4,88 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <title>RLA</title>
-        <link rel="stylesheet" type="text/css" href="<%= URLBASE %>/views/static/index.css"/>
+        <link rel="stylesheet" type="text/css" href="<%= URLBASE %>/views/static/css/upload.css"/>
+        <link rel="stylesheet" type="text/css" href="<%= URLBASE %>/views/static/css/index.css"/>
         <link rel="shortcut icon" href="<%= URLBASE %>/views/static/icon/icon-marca.ico"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="bg-slate-950">
-
-        <div class="max-w-sm mx-auto bg-white shadow py-5 px-6">
-              <div>
-                <label for="produto" class="block text-sm font-medium text-slate-700">Nome Produto</label>
-                <div class="mt-1">
-                  <input type="text" name="nome" id="produto" class="px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:shadow-none">
-                </div>
-              </div>
-              <div>
-                <label for="produto" class="block text-sm font-medium text-slate-700">Descrição</label>
-                <div class="mt-1">
-                  <textarea type="text" name="descricao" id="descricao" class="px-3 py-2 h-[150px] bg-white resize-none border shadow-sm border-slate-300 placeholder-slate-400  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:shadow-none">
-                  </textarea>
-                </div>
-              </div>
-              <div class="mt-6">
-                <label for="password" class="block text-sm font-medium text-slate-700">Arquivo</label>
-                <div class="block">
-                  <input id="oneImg" class="peer/draft" type="radio" name="status" checked />
-                  <label for="draft" class="peer-checked/draft:text-sky-500"> Imagem </label>
-                </div>
-                <div class="block">
-                  <input id="twoImg" class="peer/published" type="radio" name="status" value="antesDepois" />
-                  <label for="published" class="peer-checked/published:text-sky-500"> Antes & Depois </label>
-                </div>
-                <div id="upload" class="mt-1 flex">
-                  <input type="file" name="file" id="file" onchange="newInput(this)" class="px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:shadow-none">
-                </div>
-                <ul id="dp-files" class="flex flex-col-reverse"></ul>
-              </div>
-              <div class="mt-6 text-right">
-                <input type="button" value="Salvar" id="salvar" class="bg-sky-500 hover:bg-sky-700 px-5 py-2.5 text-sm leading-5 rounded-md font-semibold text-white">
-              </div>
+      <div id="carregando" class="z-50 hidden flex items-center justify-center flex-col fixed w-full h-full bg-black opacity-[0.85]">
+        <img class="animate-pulse h-32 w-auto" src="<%= URLBASE %>/views/static/img/img-marca.png" alt="Your Company">
+        <p class="text-white">Carregando 
+          <span 
+          style="
+          animation: liga-desliga 0.3s infinite alternate;
+          animation-delay: 0s;
+          ">.</span>
+          <span 
+          style="
+          animation: liga-desliga 0.3s infinite alternate;
+          animation-delay: 0.1s;
+          ">.</span>
+          <span 
+          style="
+          animation: liga-desliga 0.3s infinite alternate;
+          animation-delay: 0.2s;
+          ">.</span></p>
+      </div>
+      <div class="max-w-sm mx-auto bg-white shadow py-5 px-6">
+        <div class="mb-[12px]">
+          <input type="button" value="Servico" id="servico" class="bg-sky-500 hover:bg-sky-700 px-5 py-2.5 text-sm leading-5 rounded-md font-semibold text-white">
+          <input type="button" value="Produto" id="produto" class="bg-slate-500 hover:bg-sky-700 px-5 py-2.5 text-sm leading-5 rounded-md font-semibold text-white">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700">Nome Produto</label>
+          <div class="mt-1">
+            <input type="text" name="nome" id="nome" class="px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:shadow-none">
           </div>
-
-          <div id="conteudo-pesquisa" class="w-full absolute">
-            <div id="conteudo-html" class="mt-16 p-7">
-                
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700">Descrição</label>
+          <div class="mt-1">
+            <textarea type="text" name="descricao" id="descricao" class="px-3 py-2 h-[150px] bg-white resize-none border shadow-sm border-slate-300 placeholder-slate-400  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:shadow-none">
+            </textarea>
+          </div>
+        </div>
+        <div class="mt-6">
+          <label for="password" class="block text-sm font-medium text-slate-700">Arquivo</label>
+          <div id="opcoesInput">
+            <div class="block">
+              <input id="oneImg" class="peer/draft" type="radio" name="status" checked />
+              <label for="draft" class="peer-checked/draft:text-sky-500"> Imagem </label>
+            </div>
+            <div class="block">
+              <input id="twoImg" class="peer/published" type="radio" name="status" value="antesDepois" />
+              <label for="published" class="peer-checked/published:text-sky-500"> Antes & Depois </label>
             </div>
           </div>
+          <div id="upload" class="mt-1 flex">
+            <input type="file" name="file" id="file" onchange="newInput(this)" class="px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:shadow-none">
+          </div>
+          <ul id="dp-files" class="flex flex-col-reverse"></ul>
+        </div>
+        <div class="mt-6 text-right">
+          <input type="button" value="Salvar" id="salvar" class="bg-sky-500 hover:bg-sky-700 px-5 py-2.5 text-sm leading-5 rounded-md font-semibold text-white">
+        </div>
+      </div>
+
+        <div id="conteudo-pesquisa" class="w-full absolute">
+          <div class="mt-8 my-[12px] flex justify-center">
+            <input type="button" value="Servico" id="servicoListagem" class="bg-sky-500 hover:bg-sky-700 px-5 py-2.5 text-sm leading-5 rounded-md font-semibold text-white mr-[12px]">
+            <input type="button" value="Produto" id="produtoListagem" class="bg-slate-500 hover:bg-sky-700 px-5 py-2.5 text-sm leading-5 rounded-md font-semibold text-white">
+          </div>
+          <div id="conteudo-html" class="mt-16 p-7">
+              
+          </div>
+        </div>
         <script>
           const DIRETORIO = "<%= URLBASE %>";
         </script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script type="text/javascript" src="<%= URLBASE %>/views/static/global.js"></script>
-        <script type="text/javascript" src="<%= URLBASE %>/views/static/upload.js"></script>
+        <script type="text/javascript" src="<%= URLBASE %>/views/static/json/global.js"></script>
+        <script type="text/javascript" src="<%= URLBASE %>/views/static/json/upload/variaveis.js"></script>
+        <script type="text/javascript" src="<%= URLBASE %>/views/static/json/upload/listener.js"></script>
+        <script type="text/javascript" src="<%= URLBASE %>/views/static/json/upload/func.js"></script>
     </body>
 </html>

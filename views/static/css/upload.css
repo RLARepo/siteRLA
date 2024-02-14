@@ -1,0 +1,13 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+@keyframes liga-desliga {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
