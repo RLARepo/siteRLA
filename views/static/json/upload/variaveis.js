@@ -4,5 +4,5 @@ let inputFilesTipo = [];
 let firstTime = true;
 let firstTimeOne = true;
 let firstTimeTwo = true;
-let tipo = 'produto';
+let tipo = 'servico';
 let tipoListagem = 'servicoListagem';

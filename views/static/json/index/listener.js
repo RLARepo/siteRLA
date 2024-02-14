@@ -2,7 +2,7 @@ $(document).ready(() => {
     const param = JSON.parse(PARAMS.replaceAll('&#34;', '"'));
     switch (FUNCAO) {
         case 'inicial':
-            listarItens(param.item);
+            listarItens();
             break;
         case 'listar_itens':
             listarItens(param.item);
