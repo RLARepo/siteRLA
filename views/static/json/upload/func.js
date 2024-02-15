@@ -235,7 +235,7 @@ async function carregarIten(id, tipo){
     descricaoAlterarAtual = arquivo.descricao;
 }
 
-async function salvarAlterar(id, tipo, idProduto){
+async function salvarAlterar(id, tipo){
     let nome = $('#nomeAlterar').val()
     let descricao = $('#descricaoAlterar').val().replaceAll('\n', '-quebra_de_linha-')
     $('#cardAlterarNomeDesc').html(DIVCARREGANDO);
@@ -249,7 +249,7 @@ async function salvarAlterar(id, tipo, idProduto){
             id: id
         }
     });
-    carregarIten(idProduto, tipo);
+    carregarIten(id, tipo);
 }
 
 async function removerFoto(id, tipo, idProduto){
