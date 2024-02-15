@@ -19,6 +19,7 @@ async function carregarItens(item){
     </div>
     `);
     $('#carregando').addClass('hidden');
+    window.scrollTo({top: 536, behavior: 'smooth'});
 }
 
 function newInput(input) {
@@ -77,7 +78,6 @@ function inputTwoImg(input, nome, subFileStr){
         firstTime = false;
     }
     $("#dp-files").append(filesStr);
-    verificaFinalizar();
     if(nome == 'fileOne'){
         $('#arquivo1').html(subFileStr.replace('_ID_', 'oneImgTemp'));
         if(firstTimeOne){
@@ -121,6 +121,7 @@ function inputTwoImg(input, nome, subFileStr){
         };       
         file.readAsDataURL(input.files[0]);
     }
+    verificaFinalizar();
 }
 
 function removeLi(e, item, tipo) {
@@ -207,10 +208,11 @@ function verificaPrimeiroItem(){
 
 function verificaFinalizar(){
     if(inputFiles.length == 0)return;
-    $("#salvar").prop('disabled', !$('li.inputOne').length * 1 + $('li.inputTwo').length * 2 == inputFiles.length);
+    $("#salvar").prop('disabled', $('li.inputOne').length * 1 + $('li.inputTwo').length * 2 != inputFiles.length);
 }
 function limparFile(){
     let id = $('.remove').length - 1;
+    $('#nome, #descricao').val('');
     for(const botton of $('.remove')){
         $('.remove')[id].click();
         id -= 1;

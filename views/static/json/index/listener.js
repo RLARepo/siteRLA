@@ -2,7 +2,8 @@ $(document).ready(() => {
     const param = JSON.parse(PARAMS.replaceAll('&#34;', '"'));
     switch (FUNCAO) {
         case 'inicial':
-            listarItens();
+            contatos();
+            $('footer').removeClass('hidden');
             break;
         case 'listar_itens':
             listarItens(param.item);
@@ -12,6 +13,7 @@ $(document).ready(() => {
             break
         case 'contatos':
             contatos();
+            $('footer').removeClass('hidden');
             break;
         default:
             listarItens();

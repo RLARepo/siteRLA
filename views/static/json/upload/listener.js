@@ -1,7 +1,8 @@
 $( document ).ready( async() => {
-    carregarItens('servicos');
+    await carregarItens('servicos');
     $('#descricao').val('');
     $('#servico').click();
+    window.scrollTo({top: 0, behavior: 'smooth'});
 });
 
 $('#produto, #servico').on('click', (e) => {
@@ -44,6 +45,14 @@ $('#produto, #servico').on('click', (e) => {
     `);
     verificaPrimeiroItem();
     $('input:radio').on('change', () => {
+        if($("#salvarAntesDepois").prop('disabled')){
+            $('#twoImg').click();
+            return Swal.fire({
+                title: "Atenção!",
+                text: "É preciso finalizar as fotos Antes > Depois!",
+                icon: "info"
+            });
+        }
         if($('#oneVideo').prop("checked")){
             return $('#upload').html(`
                 <input type="file" name="file" id="file" onchange="newInput(this)" class="px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:shadow-none">
@@ -106,5 +115,6 @@ $('#salvar').on('click', async() => {
     }catch{
         $('#carregando').addClass('hidden');
     }
-    location.reload()
+    limparFile();
+    carregarItens(tipo + 's');
 });
