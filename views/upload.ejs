@@ -4,15 +4,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <title>RLA</title>
-        <link rel="stylesheet" type="text/css" href="<%= URLBASE %>/views/static/css/upload.css"/>
-        <link rel="stylesheet" type="text/css" href="<%= URLBASE %>/views/static/css/index.css"/>
-        <link rel="shortcut icon" href="<%= URLBASE %>/views/static/icon/icon-marca.ico"/>
+        <link rel="stylesheet" type="text/css" href="/views/static/css/upload.css"/>
+        <link rel="stylesheet" type="text/css" href="/views/static/css/index.css"/>
+        <link rel="shortcut icon" href="/views/static/icon/icon-marca.ico"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="bg-slate-950">
       <div id="carregando" class="z-50 hidden flex items-center justify-center flex-col fixed w-full h-full bg-black opacity-[0.85]">
-        <img class="animate-pulse h-32 w-auto" src="<%= URLBASE %>/views/static/img/img-marca.png" alt="Your Company">
+        <img class="animate-pulse h-32 w-auto" src="/views/static/img/img-marca.png" alt="Your Company">
         <p class="text-white">Carregando 
           <span 
           style="
@@ -53,11 +53,11 @@
           <div id="opcoesInput">
             <div class="block">
               <input id="oneImg" class="peer/draft" type="radio" name="status" checked />
-              <label for="draft" class="peer-checked/draft:text-sky-500"> Imagem </label>
+              <label for="draft" class="peer-checked/draft:text-sky-500"> Imagem<span class="second hidden">/Video</span> </label>
             </div>
             <div class="block">
               <input id="twoImg" class="peer/published" type="radio" name="status" value="antesDepois" />
-              <label for="published" class="peer-checked/published:text-sky-500"> Antes & Depois </label>
+              <label for="published" class="peer-checked/published:text-sky-500"> Antes & Depois (Imagem<span class="second hidden">/Video</span>) </label>
             </div>
           </div>
           <div id="upload" class="mt-1 flex">
@@ -66,7 +66,7 @@
           <ul id="dp-files" class="flex flex-col-reverse"></ul>
         </div>
         <div class="mt-6 text-right">
-          <input type="button" value="Salvar" id="salvar" class="bg-sky-500 hover:bg-sky-700 px-5 py-2.5 text-sm leading-5 rounded-md font-semibold text-white">
+          <input type="button" value="Salvar" id="salvar" class="disabled:cursor-not-allowed enabled:cursor-pointer disabled:bg-gray-500 enabled:bg-green-500 enabled:hover:bg-green-700 px-5 py-2.5 text-sm leading-5 rounded-md font-semibold text-white" disabled>
         </div>
       </div>
 
@@ -83,9 +83,9 @@
           const DIRETORIO = "<%= URLBASE %>";
         </script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script type="text/javascript" src="<%= URLBASE %>/views/static/json/global.js"></script>
-        <script type="text/javascript" src="<%= URLBASE %>/views/static/json/upload/variaveis.js"></script>
-        <script type="text/javascript" src="<%= URLBASE %>/views/static/json/upload/listener.js"></script>
-        <script type="text/javascript" src="<%= URLBASE %>/views/static/json/upload/func.js"></script>
+        <script type="text/javascript" src="/views/static/json/global.js"></script>
+        <script type="text/javascript" src="/views/static/json/upload/variaveis.js"></script>
+        <script type="text/javascript" src="/views/static/json/upload/listener.js"></script>
+        <script type="text/javascript" src="/views/static/json/upload/func.js"></script>
     </body>
 </html>
