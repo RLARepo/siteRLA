@@ -18,7 +18,7 @@ const verificaVideoImagem = (item, evento) => {
     for(const tipo of tipos){
         if(tipo == 'video' && itemUnico){
             itemRender += `
-            <video class="rounded-md max-w-[95%] duration-100" id="imgAtual" controls autoplay muted loop onloadstart="renderizar('${evento}')" alt="product image"/>
+            <video class="rounded-md max-w-[95%] duration-100" id="imgAtual" controls-desativado autoplay muted loop onloadstart="renderizar('${evento}')" alt="product image"/>
                 <source src="${DIRETORIO}/views/static/uploads/${item.novaImagem}">
             </video>`;
             itemUnico = false;
@@ -27,7 +27,7 @@ const verificaVideoImagem = (item, evento) => {
         if(tipo == 'video' && !itemUnico){
             itemRender += `
             ${SVGFLECHA}
-            <video class="rounded-md max-w-[95%] duration-100" id="imgAtual" controls autoplay muted loop onloadstart="renderizar('${evento}')" alt="product image"/>
+            <video class="rounded-md max-w-[95%] duration-100" id="imgAtual" controls-desativado autoplay muted loop onloadstart="renderizar('${evento}')" alt="product image"/>
                 <source src="${DIRETORIO}/views/static/uploads/${item.novaImagemDependente}">
             </video>`;
             continue;

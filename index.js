@@ -2,6 +2,7 @@ const sqlite3 = require('sqlite3');
 const { open } = require('sqlite');
 const express = require('express');
 const app = express();
+const bp = require('body-parser')
 const path = require('path');
 const multer = require('multer');
 const fs = require('fs');
@@ -29,14 +30,15 @@ const storage = multer.diskStorage({
     const tipo = req.body.tipo
     if(i == 0){
       openDb.run(
-        'INSERT INTO produto(id, nome, descricao, caminho, tipo, referencia, Tarquivo) VALUES (?, ?, ?, ?, ?, ?, ?);',
+        'INSERT INTO produto(id, nome, descricao, caminho, tipo, referencia, Tarquivo, ordem) VALUES (?, ?, ?, ?, ?, ?, ?, ?);',
         id_produto,
         req.body.nome,
         req.body.descricao,
         fileName,
         tipo,
         '',
-        Tarquivo
+        Tarquivo,
+        i
       );
     }else{
       const subItem = i;
@@ -61,11 +63,12 @@ const storage = multer.diskStorage({
         });
       }else{
         openDb.run(
-          'INSERT INTO subImagem(id_produto, caminho, referencia, Tarquivo) VALUES (?, ?, ?, ?);',
+          'INSERT INTO subImagem(id_produto, caminho, referencia, Tarquivo, ordem) VALUES (?, ?, ?, ?, ?);',
           id_produto,
           fileName,
           '',
-          Tarquivo
+          Tarquivo,
+          i
         );
       }
     }
@@ -77,7 +80,8 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 
 app.set('view engine', 'ejs');
-
+app.use(bp.json())
+app.use(bp.urlencoded({extended : true}))
 app.use(express.static(path.join(__dirname, '/')));
 
 app.get('/', (req, res) => {
@@ -121,6 +125,16 @@ app.get('/funcao/sub_arquivos/:id', async (req, res) => {
   });
 });
 
+app.post('/funcao/alterarProduto', async (req, res) => {
+  openDb.run(
+    'UPDATE produto SET nome = ?, descricao = ? WHERE id = ?;', 
+    req.body.nome,
+    req.body.descricao,
+    req.body.id
+  );
+  return res.json({status : true});
+});
+
 app.get('/funcao/ultimo_arquivo', async (req, res) => {
   openDb.get('SELECT MAX(id) AS id FROM produto;', [], (err, row) => {
     return res.json({arquivo : row.id, status : true});
@@ -134,6 +148,27 @@ app.get('/funcao/upload', (req, res, file) => {
 app.post('/funcao/upload_files', upload.array('file[]'), (req, res) => {
   i = 0
   res.json({status : true});
+});
+
+app.get('/funcao/removerFoto/:id', (req, res) => {
+  let retorno = {status : true};
+  openDb.all('SELECT * FROM subImagem WHERE id = ?;', req.params.id, (err, rows) => {
+    for(const row of rows){
+      fs.unlink(`views/static/uploads/${row.caminho}`, function(err){
+        if (err){retorno = {status : false}};
+      });
+      if(row.referencia){
+        fs.unlink(`views/static/uploads/${row.referencia}`, function(err){
+          if (err){retorno = {status : false}};
+        });
+      }
+    }
+    openDb.run(
+      'DELETE FROM subImagem WHERE id = ?;',
+      req.params.id
+    );
+    return res.json(retorno);
+  });
 });
 
 app.get('/funcao/delete_files/:id', (req, res) => {

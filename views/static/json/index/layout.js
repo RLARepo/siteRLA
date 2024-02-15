@@ -22,11 +22,11 @@ function mudaLayout(){
     const id_inicial = fotoSelecionada.id;
     $('#voltar, #avancar').addClass('cursor-pointer');
     if(id_inicial > fotosRenderizadas.length - 2){
-        $('#avancar').addClass('opacity-0 cursor-default');
+        $('#avancar').addClass('scale-0 cursor-default');
         $('#avancar').removeClass('cursor-pointer');
     }
     if(id_inicial < 1){
-        $('#voltar').addClass('opacity-0 cursor-default');
+        $('#voltar').addClass('scale-0 cursor-default');
         $('#voltar').removeClass('cursor-pointer');
     }
     if (window.innerWidth < 750 && !ja_AlterouMobile){

@@ -3,6 +3,12 @@ body{
     padding: 0;
     height: 100%;
 }
+.arquivo>img,
+.arquivo>video{
+    border: solid 0px;
+    border-radius: 12px;
+    background-color: white;
+}
 @keyframes liga-desliga {
     from {
         opacity: 1;

@@ -11,6 +11,10 @@ const SVGZAPCOLOR = `
 </linearGradient>
 </defs>
 </svg>`;
+const SVGPEN = `
+<svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none">
+    <path d="M11 4H7.2C6.0799 4 5.51984 4 5.09202 4.21799C4.71569 4.40974 4.40973 4.7157 4.21799 5.09202C4 5.51985 4 6.0799 4 7.2V16.8C4 17.9201 4 18.4802 4.21799 18.908C4.40973 19.2843 4.71569 19.5903 5.09202 19.782C5.51984 20 6.0799 20 7.2 20H16.8C17.9201 20 18.4802 20 18.908 19.782C19.2843 19.5903 19.5903 19.2843 19.782 18.908C20 18.4802 20 17.9201 20 16.8V12.5M15.5 5.5L18.3284 8.32843M10.7627 10.2373L17.411 3.58902C18.192 2.80797 19.4584 2.80797 20.2394 3.58902C21.0205 4.37007 21.0205 5.6364 20.2394 6.41745L13.3774 13.2794C12.6158 14.0411 12.235 14.4219 11.8012 14.7247C11.4162 14.9936 11.0009 15.2162 10.564 15.3882C10.0717 15.582 9.54378 15.6885 8.48793 15.9016L8 16L8.04745 15.6678C8.21536 14.4925 8.29932 13.9048 8.49029 13.3561C8.65975 12.8692 8.89125 12.4063 9.17906 11.9786C9.50341 11.4966 9.92319 11.0768 10.7627 10.2373Z" stroke="#7f7f01" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`
 const SVGZAP = `
 <svg xmlns="http://www.w3.org/2000/svg" class="m-[12px]" width="30px" height="30px" viewBox="0 0 24 24" fill="#84cc16">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M3.50002 12C3.50002 7.30558 7.3056 3.5 12 3.5C16.6944 3.5 20.5 7.30558 20.5 12C20.5 16.6944 16.6944 20.5 12 20.5C10.3278 20.5 8.77127 20.0182 7.45798 19.1861C7.21357 19.0313 6.91408 18.9899 6.63684 19.0726L3.75769 19.9319L4.84173 17.3953C4.96986 17.0955 4.94379 16.7521 4.77187 16.4751C3.9657 15.176 3.50002 13.6439 3.50002 12ZM12 1.5C6.20103 1.5 1.50002 6.20101 1.50002 12C1.50002 13.8381 1.97316 15.5683 2.80465 17.0727L1.08047 21.107C0.928048 21.4637 0.99561 21.8763 1.25382 22.1657C1.51203 22.4552 1.91432 22.5692 2.28599 22.4582L6.78541 21.1155C8.32245 21.9965 10.1037 22.5 12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5ZM14.2925 14.1824L12.9783 15.1081C12.3628 14.7575 11.6823 14.2681 10.9997 13.5855C10.2901 12.8759 9.76402 12.1433 9.37612 11.4713L10.2113 10.7624C10.5697 10.4582 10.6678 9.94533 10.447 9.53028L9.38284 7.53028C9.23954 7.26097 8.98116 7.0718 8.68115 7.01654C8.38113 6.96129 8.07231 7.046 7.84247 7.24659L7.52696 7.52195C6.76823 8.18414 6.3195 9.2723 6.69141 10.3741C7.07698 11.5163 7.89983 13.314 9.58552 14.9997C11.3991 16.8133 13.2413 17.5275 14.3186 17.8049C15.1866 18.0283 16.008 17.7288 16.5868 17.2572L17.1783 16.7752C17.4313 16.5691 17.5678 16.2524 17.544 15.9269C17.5201 15.6014 17.3389 15.308 17.0585 15.1409L15.3802 14.1409C15.0412 13.939 14.6152 13.9552 14.2925 14.1824Z"/>
@@ -22,6 +26,10 @@ const SVGCALL = `
 const SVGFLECHA = `
 <svg xmlns="http://www.w3.org/2000/svg" id="flechaSvg" class="bg-white border rounded-3xl min-w-[32px]" width="30px" height="30px" viewBox="0 0 24 24" fill="#ffffff">
     <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`;
+const SVGFLECHANOSTYLE = `
+<svg xmlns="http://www.w3.org/2000/svg" id="flechaSvg" width="30px" height="30px" viewBox="0 0 24 24" fill="#000000">
+    <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="#9d9d06" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
 const SVGCLOCK = `
 <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="#e5e7eb">
@@ -117,7 +125,7 @@ const INFO = `
     </div>
     <div class="flex w-3/6 min-w-[350px] p-5 justify-center">
         <div class="card-local w-[350px] h-[300px] flex justify-center">
-            <iframe onload="console.log('a')" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26362.65629575788!2d-42.744307296480024!3d-10.824142162336916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x765921521a3a289%3A0xd0bc236aee3dda01!2sXique-Xique%2C%20BA%2C%2047400-000!5e0!3m2!1spt-BR!2sbr!4v1703708238405!5m2!1spt-BR!2sbr" width="350" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26362.65629575788!2d-42.744307296480024!3d-10.824142162336916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x765921521a3a289%3A0xd0bc236aee3dda01!2sXique-Xique%2C%20BA%2C%2047400-000!5e0!3m2!1spt-BR!2sbr!4v1703708238405!5m2!1spt-BR!2sbr" width="350" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
 </div>`;
@@ -191,15 +199,85 @@ const ITEM = `
     </div>
 </div>`;
 const ITEMEDIT = `
-<div class="itens border-4 border-double rounded-lg shadow bg-slate-900 border-sky-950" onclick="carregarIten(_ID_, '_TIPO_')">
+<div class="itens border-4 border-double rounded-lg shadow bg-slate-900 border-sky-950">
     <a class="flex justify-center">
         <img class="p-8 rounded-t-lg" src="${DIRETORIO}/views/static/uploads/_LINKIMAGEM_" alt="product image" style="width: 200px;"/>
     </a>
     <div class="px-5 pb-5">
         <a class="break-all flex justify-center">
-            <h5 class="text-xl font-semibold mr-[15px] tracking-tight text-white">_DESCRICAO_</h5><button onclick="deletar(_ID_, '_TIPO_')">${SVGLIXO}</button>
+            <h5 class="text-xl font-semibold mr-[15px] tracking-tight text-white">_DESCRICAO_</h5>
         </a>
+        <button onclick="deletar(_ID_, '_TIPO_')">${SVGLIXO}</button>
+        <button onclick="carregarIten(_ID_, '_TIPO_')">${SVGPEN}</button>
     </div>
 </div>`;
-
-'border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 ';
+const PRODUTOSERVICOALTERAR = `
+<div id="cardAlterarNomeDesc" class="p-[12px] bg-slate-950 lg:w-[49%] lg:mb-[0px] mb-[20px] w-[100%] border-4 border-sky-950 border-double">
+    <h1 class="block text-2xl font-medium text-white mb-[12px]"> Nome / Descrição : </h1>
+    <div>
+        <label class="block text-sm font-medium text-white"> Nome Produto </label>
+        <div class="mt-1">
+        <input type="text" name="nome" id="nomeAlterar" onkeyup="verificaAlterar()" value="_NOMEPROD_" class="px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:shadow-none">
+        </div>
+    </div>
+    <div>
+        <label class="block text-sm font-medium text-white"> Descrição </label>
+        <div class="mt-1">
+        <textarea type="text" name="descricao" id="descricaoAlterar" onkeyup="verificaAlterar()" class="px-3 py-2 h-[150px] bg-white resize-none border shadow-sm border-slate-300 placeholder-slate-400  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:shadow-none">
+_DESCPROD_</textarea>
+        </div>
+    </div>
+    <div class="mt-3 text-right">
+        <input type="button" value="Salvar" onclick="salvarAlterar(_ID_, '_TIPO_')" id="salvarAlterar" class="disabled:cursor-not-allowed enabled:cursor-pointer disabled:bg-gray-500 enabled:bg-green-500 enabled:hover:bg-green-700 px-5 py-2.5 text-sm leading-5 rounded-md font-semibold text-white" disabled>
+    </div>
+</div>
+<div id="cardAlterarFoto" class="p-[12px] bg-slate-950 lg:w-[49%] w-[100%] border-4 border-sky-950 border-double overflow-auto">
+    <h1 class="block text-2xl font-medium text-white mb-[12px]"> Imagens (orderm das imagens é de cima para baixo) : </h1>
+    <ul id="dp-files" class="flex flex-col">
+        _LISTAIMAGENS_
+    </ul>
+</div>`;
+const IMAGEMMOLDEUNICA = `
+<li class="arquivo inputOne mt-[12px] flex items-center justify-between">
+    _IMAGEVIDEO1_
+    <div class=" flex">
+        <button type="button" onclick="removerFoto(_ID_, '_TIPO_', _IDPRODUTO_)" class="remove _VISIBLE_ border border-double border-sky-900 bg-black hover:bg-red-300 text-white font-bold py-2 px-4 rounded itensI">${SVGLIXO}</button>
+        <button type="button" class="rotate-[270deg] _VISIBLE_ border border-double border-sky-900 alterar bg-black hover:bg-yellow-300 text-white font-bold py-2 px-4 rounded itensI">${SVGFLECHANOSTYLE}</button>
+    </div>
+</li>`;
+const IMAGEMMOLDEDUPLO = `
+<li class="inputTwo mt-[12px] flex items-center max-w-[100%] justify-between">
+    <div class="w-[70%] flex justify-between items-center">
+        <div class="arquivo mr-[12px] max-w-[20%]">
+            _IMAGEVIDEO1_
+        </div>
+        ${SVGFLECHA}
+        <div class="arquivo mr-[12px] max-w-[20%]">
+            _IMAGEVIDEO2_
+        </div>
+    </div>
+    <div class="flex">
+        <button type="button" onclick="removerFoto(_ID_, '_TIPO_', _IDPRODUTO_)" class="remove _VISIBLE_ border border-double border-sky-900 bg-black hover:bg-red-300 text-white font-bold py-2 px-4 rounded itensI">${SVGLIXO}</button>
+        <button type="button" class="rotate-[270deg] _VISIBLE_ border border-double border-sky-900 alterar bg-black hover:bg-yellow-300 text-white font-bold py-2 px-4 rounded itensI">${SVGFLECHANOSTYLE}</button>
+    </div>
+</li>`;
+const DIVCARREGANDO = `
+<div class="w-full h-full flex justify-center items-center flex-col">
+    <img class="animate-pulse h-32 w-auto" src="/views/static/img/img-marca.png" alt="Your Company">
+    <p class="text-white">Carregando
+        <span 
+        style="
+        animation: liga-desliga 0.3s infinite alternate;
+        animation-delay: 0s;
+        ">.</span>
+        <span 
+        style="
+        animation: liga-desliga 0.3s infinite alternate;
+        animation-delay: 0.1s;
+        ">.</span>
+        <span 
+        style="
+        animation: liga-desliga 0.3s infinite alternate;
+        animation-delay: 0.2s;
+        ">.</span></p>
+</div>`;

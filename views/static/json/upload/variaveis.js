@@ -6,3 +6,5 @@ let firstTimeOne = true;
 let firstTimeTwo = true;
 let tipo = 'servico';
 let tipoListagem = 'servicoListagem';
+let nomeAlterarAtual;
+let descricaoAlterarAtual;

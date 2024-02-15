@@ -83,19 +83,17 @@ async function listarItem(id, item){
     const id_inicial = fotoSelecionada.id;
     $('#voltar, #avancar').addClass('cursor-pointer');
     if(id_inicial > fotosRenderizadas.length - 2){
-        $('#avancar').addClass('opacity-0 cursor-default');
+        $('#avancar').addClass('scale-0 cursor-default');
         $('#avancar').removeClass('cursor-pointer');
     }
     if(id_inicial < 1){
-        $('#voltar').addClass('opacity-0 cursor-default');
+        $('#voltar').addClass('scale-0 cursor-default');
         $('#voltar').removeClass('cursor-pointer');
     }
 };
 
 function selecionado(id, evento){
-    console.log(fotosRenderizadas[id]);
     const itemImgVideo = verificaVideoImagem(fotosRenderizadas[id], evento);
-    console.log(itemImgVideo)
     $('#imgPrincipal').html(itemImgVideo);
     fotoSelecionada.id = fotosRenderizadas[id].id;
     fotoSelecionada.novaImagem = fotosRenderizadas[id].novaImagem;
@@ -119,18 +117,16 @@ function voltar(){
     $('#voltar').addClass('cursor-pointer');
     if(id < 0){
         $('#voltar').removeClass('cursor-pointer');
-        return $('#voltar').addClass('opacity-0 cursor-default');
+        return $('#voltar').addClass('scale-0 cursor-default');
     } 
     if(id < 1){
         $('#voltar').removeClass('cursor-pointer');
-        $('#voltar').addClass('opacity-0 cursor-default');
+        $('#voltar').addClass('scale-0 cursor-default');
     }
-    $('#avancar').removeClass('opacity-0 cursor-default');
+    $('#avancar').removeClass('scale-0 cursor-default');
     $('#avancar').addClass('cursor-pointer');
-    $('#imgPrincipal').addClass('opacity-0 translate-x-[-11rem]');
+    $('#imgPrincipal').addClass('opacity-0 scale-0');
     setTimeout(() => {
-        $('#imgPrincipal').removeClass('translate-x-[-11rem]');
-        $('#imgPrincipal').addClass('translate-x-44');
         selecionado(id, 'voltar');
     }, 100)
 }
@@ -140,18 +136,16 @@ function avancar(){
     $('#avancar').addClass('cursor-pointer');
     if(id > fotosRenderizadas.length - 1){
         $('#avancar').removeClass('cursor-pointer');
-        return $('#avancar').addClass('opacity-0 cursor-default'); 
+        return $('#avancar').addClass('scale-0 cursor-default'); 
     } 
     if(id > fotosRenderizadas.length - 2){
-        $('#avancar').addClass('opacity-0 cursor-default');
+        $('#avancar').addClass('scale-0 cursor-default');
         $('#avancar').removeClass('cursor-pointer');
     } 
-    $('#voltar').removeClass('opacity-0 cursor-default');
+    $('#voltar').removeClass('scale-0 cursor-default');
     $('#voltar').addClass('cursor-pointer');
-    $('#imgPrincipal').addClass('opacity-0 translate-x-44');
+    $('#imgPrincipal').addClass('opacity-0 scale-0');
     setTimeout(() => {
-        $('#imgPrincipal').removeClass('translate-x-44');
-        $('#imgPrincipal').addClass('translate-x-[-11rem]');
         selecionado(id, 'avancar');
     }, 100)
 }
@@ -164,12 +158,12 @@ function renderizar(evento, c){
     count = 0;
     if(evento == 'avancar'){
         setTimeout(() => {
-            $('#imgPrincipal').removeClass('opacity-0 translate-x-[-11rem]');
+            $('#imgPrincipal').removeClass('opacity-0 scale-0');
         }, 100)
         return;
     }
     setTimeout(() => {
-        $('#imgPrincipal').removeClass('opacity-0 translate-x-44');
+        $('#imgPrincipal').removeClass('opacity-0 scale-0');
     }, 100)
 }
 

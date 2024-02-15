@@ -1,8 +1,8 @@
 $( document ).ready( async() => {
     await carregarItens('servicos');
-    $('#descricao').val('');
     $('#servico').click();
     window.scrollTo({top: 0, behavior: 'smooth'});
+    $('#descricao').val('');
 });
 
 $('#produto, #servico').on('click', (e) => {
@@ -84,7 +84,7 @@ $('#produtoListagem, #servicoListagem').on('click', (e) => {
     }else{
         carregarItens('produtos');
     }
-})
+});
 
 $('#salvar').on('click', async() => {
     $('#carregando').removeClass('hidden');
@@ -116,5 +116,6 @@ $('#salvar').on('click', async() => {
         $('#carregando').addClass('hidden');
     }
     limparFile();
-    carregarItens(tipo + 's');
+    $('#carregando').addClass('hidden');
+    $('#' + tipo + 'Listagem').click();
 });

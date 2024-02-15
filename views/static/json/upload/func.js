@@ -125,9 +125,6 @@ function inputTwoImg(input, nome, subFileStr){
 }
 
 function removeLi(e, item, tipo) {
-    // inputFiles = inputFiles.filter(function(file) {
-    //     return file.name !== e.parentNode.innerHTML.split("<button")[0];
-    // });
     if(tipo){
         inputFiles.splice(item, tipo == 'oneItem' ? 1 : 2);
     }
@@ -177,12 +174,92 @@ function salvarLi(e, primeiroItem, segundoItem, card) {
     verificaFinalizar();
 }
 
-async function carregarIten(id){
+async function carregarIten(id, tipo){
+    $('body').addClass('overflow-hidden')
+    $('#alterarItem').removeClass('hidden');
     const {arquivo}= await $.ajax({
-        url: DIRETORIO + `/funcao/servico/${id}`,
+        url: DIRETORIO + `/funcao/${tipo.substr(0, tipo.length - 1)}/${id}`,
         dataType: 'json',
         method: 'GET'
     });
+    const {subArquivos} = await $.ajax({
+        url: `/funcao/sub_arquivos/${id}`,
+        dataType: 'json',
+        method: 'GET'
+    });
+    const tipos = arquivo.Tarquivo.split('-');
+    let i = 1;
+    let imagem = tipos.length == 1 ? IMAGEMMOLDEUNICA : IMAGEMMOLDEDUPLO;
+    for(const tipo of tipos){
+        subFileStr = tipo == 'image' ?
+        `<img class="_CSS_" src="_SRC_"></img>` : 
+        `<video class="_CSS_" src="_SRC_" autoplay muted loop></video>`;
+        subFileStr = subFileStr
+        .replace('_CSS_', tipos.length == 1 ? 'mr-[12px]  max-w-[20%]' : '')
+        .replace('_SRC_', `/views/static/uploads/${i == 1 ? arquivo.caminho : arquivo.referencia}`);
+        imagem = imagem
+        .replace(`_IMAGEVIDEO${i}_`, subFileStr)
+        .replaceAll('_VISIBLE_', 'hidden');
+        i += 1
+    }
+    let imagens = imagem;
+    for(const sub of subArquivos){
+        const typo = sub.Tarquivo.split('-');
+        let i = 1;
+        let img = typo.length == 1 ? IMAGEMMOLDEUNICA : IMAGEMMOLDEDUPLO;
+        for(const t of typo){
+            subFileStr = t == 'image' ?
+            `<img class="_CSS_" src="_SRC_"></img>` : 
+            `<video class="_CSS_" src="_SRC_" autoplay muted loop></video>`;
+            subFileStr = subFileStr
+            .replace('_CSS_', typo.length == 1 ? 'mr-[12px]  max-w-[20%]' : '')
+            .replace('_SRC_', `/views/static/uploads/${i == 1 ? sub.caminho : sub.referencia}`);
+            img = img
+            .replace(`_IMAGEVIDEO${i}_`, subFileStr)
+            .replace('_ID_', sub.id)
+            .replace('_TIPO_', tipo)
+            .replace('_IDPRODUTO_', id);
+            i += 1
+        }
+        imagens += img;
+    }
+    $('#conteudoAlterar').html(
+        PRODUTOSERVICOALTERAR
+        .replace('_NOMEPROD_', arquivo.nome)
+        .replace('_DESCPROD_', arquivo.descricao)
+        .replace('_LISTAIMAGENS_', imagens)
+        .replace('_ID_', arquivo.id)
+        .replace('_TIPO_', tipo)
+    );
+    nomeAlterarAtual = arquivo.nome;
+    descricaoAlterarAtual = arquivo.descricao;
+}
+
+async function salvarAlterar(id, tipo, idProduto){
+    let nome = $('#nomeAlterar').val()
+    let descricao = $('#descricaoAlterar').val().replaceAll('\n', '-quebra_de_linha-')
+    $('#cardAlterarNomeDesc').html(DIVCARREGANDO);
+    await $.ajax({
+        url: DIRETORIO + '/funcao/alterarProduto',
+        dataType: 'json',
+        method: 'POST',
+        data: {
+            nome : nome, 
+            descricao : descricao,
+            id: id
+        }
+    });
+    carregarIten(idProduto, tipo);
+}
+
+async function removerFoto(id, tipo, idProduto){
+    $('#cardAlterarFoto').html(DIVCARREGANDO);
+    await $.ajax({
+        url: DIRETORIO + `/funcao/removerFoto/${id}`,
+        dataType: 'json',
+        method: 'GET'
+    });
+    carregarIten(idProduto, tipo);
 }
 
 async function deletar(id, tipo){
@@ -210,6 +287,7 @@ function verificaFinalizar(){
     if(inputFiles.length == 0)return;
     $("#salvar").prop('disabled', $('li.inputOne').length * 1 + $('li.inputTwo').length * 2 != inputFiles.length);
 }
+
 function limparFile(){
     let id = $('.remove').length - 1;
     $('#nome, #descricao').val('');
@@ -217,4 +295,19 @@ function limparFile(){
         $('.remove')[id].click();
         id -= 1;
     }
+}
+
+function verificaAlterar(){
+    if($('#nomeAlterar').val() != nomeAlterarAtual){
+        return $("#salvarAlterar").prop('disabled', false)
+    }
+    if($('#descricaoAlterar').val() != descricaoAlterarAtual){
+        return $("#salvarAlterar").prop('disabled', false)
+    }
+    $("#salvarAlterar").prop('disabled', true)
+}
+
+function finalizarAlterar(){
+    $('#carregando').removeClass('hidden');
+    location.reload();
 }

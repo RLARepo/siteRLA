@@ -11,9 +11,33 @@
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="bg-slate-950">
+      <div id="alterarItem" style="background: #000000b0;" class="z-50 hidden flex items-center justify-center flex-col fixed w-full h-full" >
+        <div id="conteudoAlterar" class="lg:flex lg:justify-between sm:p-12 p-2 bg-slate-900 h-[90%] w-[95%] overflow-auto">
+          <div class="w-full h-full flex justify-center items-center flex-col">
+            <img class="animate-pulse h-32 w-auto" src="/views/static/img/img-marca.png" alt="Your Company">
+            <p class="text-white">Carregando
+              <span 
+              style="
+              animation: liga-desliga 0.3s infinite alternate;
+              animation-delay: 0s;
+              ">.</span>
+              <span 
+              style="
+              animation: liga-desliga 0.3s infinite alternate;
+              animation-delay: 0.1s;
+              ">.</span>
+              <span 
+              style="
+              animation: liga-desliga 0.3s infinite alternate;
+              animation-delay: 0.2s;
+              ">.</span></p>
+          </div>
+        </div>
+        <button id="finalizarAlterar" onclick="finalizarAlterar()" type="button" class="mt-[12px] cursor-pointer bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Finalizar</button>
+      </div>
       <div id="carregando" class="z-50 hidden flex items-center justify-center flex-col fixed w-full h-full bg-black opacity-[0.85]">
         <img class="animate-pulse h-32 w-auto" src="/views/static/img/img-marca.png" alt="Your Company">
-        <p class="text-white">Carregando 
+        <p class="text-white">Carregando
           <span 
           style="
           animation: liga-desliga 0.3s infinite alternate;
@@ -69,7 +93,6 @@
           <input type="button" value="Salvar" id="salvar" class="disabled:cursor-not-allowed enabled:cursor-pointer disabled:bg-gray-500 enabled:bg-green-500 enabled:hover:bg-green-700 px-5 py-2.5 text-sm leading-5 rounded-md font-semibold text-white" disabled>
         </div>
       </div>
-
         <div id="conteudo-pesquisa" class="w-full absolute">
           <div class="mt-8 my-[12px] flex justify-center">
             <input type="button" value="Servico" id="servicoListagem" class="bg-sky-500 hover:bg-sky-700 px-5 py-2.5 text-sm leading-5 rounded-md font-semibold text-white mr-[12px]">
