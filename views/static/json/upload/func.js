@@ -18,7 +18,7 @@ async function carregarItens(item){
         ${ITENS}
     </div>
     `);
-    $('#carregando').addClass('hidden');
+    carregadoPreview();
     window.scrollTo({top: 536, behavior: 'smooth'});
 }
 
@@ -266,7 +266,7 @@ async function removerFoto(id, tipo, idProduto){
 }
 
 async function deletar(id, tipo){
-    $('#carregando').removeClass('hidden');
+    carregandoPreview();
     const resposta = await $.ajax({
         url: DIRETORIO + `/funcao/delete_files/${id}`,
         dataType: 'json',
@@ -311,7 +311,7 @@ function verificaAlterar(){
 }
 
 function finalizarAlterar(){
-    $('#carregando').removeClass('hidden');
+    carregandoPreview();
     location.reload();
 }
 

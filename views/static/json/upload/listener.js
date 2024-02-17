@@ -108,7 +108,7 @@ $('#salvar').on('click', async() => {
                 var xhr = new window.XMLHttpRequest();
                 xhr.upload.addEventListener("progress", function(evt) {
                     if (evt.lengthComputable) {
-                        var percentComplete = (evt.loaded / evt.total) * 100;
+                        var percentComplete = Math.round((evt.loaded / evt.total) * 100);
                         $('#progresso').css('width', `${percentComplete}%`);
                         $('#porcentagemProgresso').html(`${percentComplete}%`);
                         if(percentComplete == 100){
