@@ -104,6 +104,16 @@ $('#salvar').on('click', async() => {
     }
     try{
         await $.ajax({
+            xhr: function() {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function(evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = (evt.loaded / evt.total) * 100;
+                        $('#progresso').css('width', `${percentComplete}%`);
+                    }
+                }, false);
+                return xhr;
+            },
             url: DIRETORIO + '/funcao/upload_files',
             dataType: 'json',
             method: 'POST',
