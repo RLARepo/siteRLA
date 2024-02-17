@@ -110,6 +110,27 @@ $('#salvar').on('click', async() => {
                     if (evt.lengthComputable) {
                         var percentComplete = (evt.loaded / evt.total) * 100;
                         $('#progresso').css('width', `${percentComplete}%`);
+                        $('#porcentagemProgresso').html(`${percentComplete}%`);
+                        if(percentComplete == 100){
+                            $('#porcentagemProgresso').html(`
+                                Aguardando Servidor
+                                <span 
+                                style="
+                                animation: liga-desliga 0.3s infinite alternate;
+                                animation-delay: 0s;
+                                ">.</span>
+                                <span 
+                                style="
+                                animation: liga-desliga 0.3s infinite alternate;
+                                animation-delay: 0.1s;
+                                ">.</span>
+                                <span 
+                                style="
+                                animation: liga-desliga 0.3s infinite alternate;
+                                animation-delay: 0.2s;
+                                ">.</span>
+                            `);
+                        }
                     }
                 }, false);
                 return xhr;

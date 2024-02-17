@@ -32,8 +32,8 @@ function newInput(input) {
         });
     }
     const subFileStr = videoImage ?
-    `<img id="_ID_" class="_CSS_"></img>` : 
-    `<video id="_ID_" class="_CSS_" autoplay muted loop></video>`
+    `<img id="_ID_" class="_CSS_" onload="carregadoPreview()"></img>` : 
+    `<video id="_ID_" class="_CSS_" autoplay muted loop onloadstart="carregadoPreview()"></video>`
     if($('#oneImg').prop('checked')){
         inputOneImg(input, subFileStr);
         verificaPrimeiroItem();
@@ -52,6 +52,7 @@ function inputOneImg(input, subFileStr){
             <button onclick="removeLi(this, ${inputFiles.length - 1}, 'oneItem')" type="button" class="remove bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded itensI">Remover</button>
         </li>`;
     var file = new FileReader();
+    carregandoPreview();
     $("#dp-files").append(filesStr);
     file.onload = function() {
         fileImg = file.result;
@@ -87,6 +88,7 @@ function inputTwoImg(input, nome, subFileStr){
             inputFiles[inputFiles.length - 1] = input.files[0];
         }
         var file = new FileReader();
+        carregandoPreview();
         file.onload = function() {
             fileImg = file.result;
             document.getElementById('oneImgTemp').src = fileImg;
@@ -108,6 +110,7 @@ function inputTwoImg(input, nome, subFileStr){
             inputFiles[inputFiles.length - 1] = input.files[0];
         }
         var file = new FileReader();
+        carregandoPreview();
         file.onload = function() {
             fileImg = file.result;
             document.getElementById('twoImgTemp').src = fileImg;
@@ -284,7 +287,7 @@ function verificaPrimeiroItem(){
 }
 
 function verificaFinalizar(){
-    if(inputFiles.length == 0)return;
+    if(inputFiles.length == 0)return $("#salvar").prop('disabled', true);
     $("#salvar").prop('disabled', $('li.inputOne').length * 1 + $('li.inputTwo').length * 2 != inputFiles.length);
 }
 
@@ -310,4 +313,14 @@ function verificaAlterar(){
 function finalizarAlterar(){
     $('#carregando').removeClass('hidden');
     location.reload();
+}
+
+function carregandoPreview(){
+    $('#progressoBar').addClass('hidden');
+    $('#carregando').removeClass('hidden');
+}
+
+function carregadoPreview(){
+    $('#progressoBar').removeClass('hidden');
+    $('#carregando').addClass('hidden');
 }
