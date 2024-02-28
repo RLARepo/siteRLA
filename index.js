@@ -171,6 +171,51 @@ app.get('/funcao/removerFoto/:id', (req, res) => {
   });
 });
 
+app.get('/funcao/alterarPosicao/:id/:idProduto', async (req, res) => {
+  let retorno = {status : true};
+  openDb.get('SELECT * FROM subImagem WHERE id = ?;', req.params.id, (err, rowAtual) => {
+    if(rowAtual.ordem > 1){
+      openDb.get('SELECT * FROM subImagem WHERE id = ?;', req.params.id - 1, async (err, rowProxima) => {
+        openDb.run(
+          `UPDATE subImagem SET caminho = ?, referencia = ?, Tarquivo = ? WHERE id = ?;`,
+          rowProxima.caminho,
+          rowProxima.referencia,
+          rowProxima.Tarquivo,
+          rowAtual.id
+        );
+        openDb.run(
+          `UPDATE subImagem SET caminho = ?, referencia = ?, Tarquivo = ? WHERE id = ?;`,
+          rowAtual.caminho,
+          rowAtual.referencia,
+          rowAtual.Tarquivo,
+          rowProxima.id
+        );
+        console.log(rowProxima)
+        console.log(rowAtual)
+      });
+      return res.json(retorno);
+    }
+    console.log(2)
+    openDb.get('SELECT * FROM produto WHERE id = ?;', req.params.idProduto, async (err, rowProxima) => {
+      openDb.run(
+        `UPDATE subImagem SET caminho = ?, referencia = ?, Tarquivo = ? WHERE id = ?;`,
+        rowProxima.caminho,
+        rowProxima.referencia,
+        rowProxima.Tarquivo,
+        rowAtual.id
+      );
+      openDb.run(
+        `UPDATE produto SET caminho = ?, referencia = ?, Tarquivo = ? WHERE id = ?;`,
+        rowAtual.caminho,
+        rowAtual.referencia,
+        rowAtual.Tarquivo,
+        rowProxima.id
+      );
+    });
+    return res.json(retorno);
+  })
+});
+
 app.get('/funcao/delete_files/:id', (req, res) => {
   let retorno = {status : true};
   openDb.all('SELECT * FROM subImagem WHERE id_produto = ?;', req.params.id, (err, rows) => {

@@ -133,7 +133,7 @@ const INFOPRODUTOMOBILE = `
 <div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex flex-col items-center" id="descricaoItem">
     <div class="pt-8 w-[70%]" id="nome">
         <a class="break-all">
-            <h5 class="text-xl uppercase font-semibold tracking-tight text-white mb-[12px]"><span class="definicaoNome">NOME</span> : _NOME_</h5>
+            <h5 class="text-xl uppercase font-semibold tracking-tight text-white mb-[12px]">_NOME_</h5>
         </a>
     </div>    
     <div class="flex justify-center items-center min-h-[400px]"> 
@@ -153,7 +153,7 @@ const INFOPRODUTOMOBILE = `
     </div>
     <div class="pt-8 pb-5 w-[90%]" id="descricao">
         <a class="break-all">
-            <h5 class="text-x font-semibold tracking-tight text-white text-justify	"><span class="definicaoDescricao text-xl">DESCRIÇÃO</span> : _DESCRICAO_</h5>
+            <h5 class="text-x font-semibold tracking-tight text-white text-justify">_DESCRICAO_</h5>
         </a>
     </div>
 </div>`;
@@ -161,7 +161,7 @@ const INFOPRODUTOPC = `
 <div class="border-4 border-double rounded-md shadow bg-slate-900 border-sky-950 flex flex-col items-center" id="descricaoItem">
     <div class="pt-8 w-[70%]" id="nome">
         <a class="break-all">
-            <h5 class="text-xl uppercase font-semibold tracking-tight text-white mb-[12px]"><span class="definicaoNome">NOME</span> : _NOME_</h5>
+            <h5 class="text-xl uppercase font-semibold tracking-tight text-white mb-[12px]">_NOME_</h5>
         </a>
     </div>
     <div class="flex justify-center items-center min-h-[400px]">
@@ -183,7 +183,7 @@ const INFOPRODUTOPC = `
     </div> 
     <div class="pt-8 pb-5 w-[90%]" id="descricao">
         <a class="break-all">
-            <h5 class="text-xl font-semibold tracking-tight text-white text-justify"><span class="definicaoDescricao text-xl">DESCRIÇÃO</span> : _DESCRICAO_</h5>
+            <h5 class="text-xl font-semibold tracking-tight text-white text-justify">_DESCRICAO_</h5>
         </a>
     </div>
 </div>`;
@@ -242,7 +242,7 @@ const IMAGEMMOLDEUNICA = `
     _IMAGEVIDEO1_
     <div class=" flex">
         <button type="button" onclick="removerFoto(_ID_, '_TIPO_', _IDPRODUTO_)" class="remove _VISIBLE_ border border-double border-sky-900 bg-black hover:bg-red-300 text-white font-bold py-2 px-4 rounded itensI">${SVGLIXO}</button>
-        <button type="button" class="rotate-[270deg] _VISIBLE_ border border-double border-sky-900 alterar bg-black hover:bg-yellow-300 text-white font-bold py-2 px-4 rounded itensI">${SVGFLECHANOSTYLE}</button>
+        <button type="button" onclick="alterarPosicaoFoto(_ID_, '_TIPO_',_IDPRODUTO_)" class="rotate-[270deg] _VISIBLE_ border border-double border-sky-900 alterar bg-black hover:bg-yellow-300 text-white font-bold py-2 px-4 rounded itensI">${SVGFLECHANOSTYLE}</button>
     </div>
 </li>`;
 const IMAGEMMOLDEDUPLO = `
@@ -258,7 +258,7 @@ const IMAGEMMOLDEDUPLO = `
     </div>
     <div class="flex">
         <button type="button" onclick="removerFoto(_ID_, '_TIPO_', _IDPRODUTO_)" class="remove _VISIBLE_ border border-double border-sky-900 bg-black hover:bg-red-300 text-white font-bold py-2 px-4 rounded itensI">${SVGLIXO}</button>
-        <button type="button" class="rotate-[270deg] _VISIBLE_ border border-double border-sky-900 alterar bg-black hover:bg-yellow-300 text-white font-bold py-2 px-4 rounded itensI">${SVGFLECHANOSTYLE}</button>
+        <button type="button" onclick="alterarPosicaoFoto(_ID_, '_TIPO_',_IDPRODUTO_)" class="rotate-[270deg] _VISIBLE_ border border-double border-sky-900 alterar bg-black hover:bg-yellow-300 text-white font-bold py-2 px-4 rounded itensI">${SVGFLECHANOSTYLE}</button>
     </div>
 </li>`;
 const DIVCARREGANDO = `

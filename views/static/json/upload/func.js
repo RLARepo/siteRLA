@@ -219,9 +219,9 @@ async function carregarIten(id, tipo){
             .replace('_SRC_', `/views/static/uploads/${i == 1 ? sub.caminho : sub.referencia}`);
             img = img
             .replace(`_IMAGEVIDEO${i}_`, subFileStr)
-            .replace('_ID_', sub.id)
-            .replace('_TIPO_', tipo)
-            .replace('_IDPRODUTO_', id);
+            .replaceAll('_ID_', sub.id)
+            .replaceAll('_TIPO_', tipo)
+            .replaceAll('_IDPRODUTO_', id);
             i += 1
         }
         imagens += img;
@@ -259,6 +259,16 @@ async function removerFoto(id, tipo, idProduto){
     $('#cardAlterarFoto').html(DIVCARREGANDO);
     await $.ajax({
         url: DIRETORIO + `/funcao/removerFoto/${id}`,
+        dataType: 'json',
+        method: 'GET'
+    });
+    carregarIten(idProduto, tipo);
+}
+
+async function alterarPosicaoFoto(id, tipo, idProduto){
+    $('#cardAlterarFoto').html(DIVCARREGANDO);
+    await $.ajax({
+        url: DIRETORIO + `/funcao/alterarPosicao/${id}/${idProduto}`,
         dataType: 'json',
         method: 'GET'
     });
